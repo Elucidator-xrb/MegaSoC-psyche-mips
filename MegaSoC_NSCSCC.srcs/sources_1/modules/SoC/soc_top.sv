@@ -6,7 +6,7 @@ module soc_top #(
     input cpu_clk,
     input aresetn,
     
-    output [5:0]  mem_axi_awid,
+    output [6:0]  mem_axi_awid,
     output [31:0] mem_axi_awaddr,
     output [7:0]  mem_axi_awlen,
     output [2:0]  mem_axi_awsize,
@@ -19,10 +19,10 @@ module soc_top #(
     output        mem_axi_wvalid,
     input         mem_axi_wready,
     output        mem_axi_bready,
-    input  [5:0]  mem_axi_bid,
+    input  [6:0]  mem_axi_bid,
     input  [1:0]  mem_axi_bresp,
     input         mem_axi_bvalid,
-    output [5:0]  mem_axi_arid,
+    output [6:0]  mem_axi_arid,
     output [31:0] mem_axi_araddr,
     output [7:0]  mem_axi_arlen,
     output [2:0]  mem_axi_arsize,
@@ -30,7 +30,7 @@ module soc_top #(
     output        mem_axi_arvalid,
     input         mem_axi_arready,
     output        mem_axi_rready,
-    input [5:0]   mem_axi_rid,
+    input [6:0]   mem_axi_rid,
     input [31:0]  mem_axi_rdata,
     input [1:0]   mem_axi_rresp,
     input         mem_axi_rlast,
@@ -71,6 +71,13 @@ module soc_top #(
     output          phy_rstn,
     
     output [15:0]   led,
+
+    output  [3:0]   vga_r,
+    output  [3:0]   vga_g,
+    output  [3:0]   vga_b,
+    output          vga_hsync,
+    output          vga_vsync,
+    input           vga_clk,
     
     input  [3:0]    sd_dat_i,
     output [3:0]    sd_dat_o,
@@ -114,14 +121,20 @@ module soc_top #(
 
 `AXI_LINE(cpu_m);
 `AXI_LINE(sdc_dma_m);
+`AXI_LINE(vga_dma_m);
+`AXI_LINE(fbr_dma_m);
+`AXI_LINE(fbw_dma_m);
 `AXI_LINE(mem_m);
 
 `AXI_LINE(spi_s);
 `AXI_LINE(eth_s);
 `AXI_LINE(intc_s);
 `AXI_LINE(sdc_s);
+`AXI_LINE(vga_s);
+`AXI_LINE(fbr_s);   // framebuffer reader
+`AXI_LINE(fbw_s);   // framebuffer writer
 
-`AXI_LINE_W(mig_s, 6);
+`AXI_LINE_W(mig_s, 7);
 `AXI_LINE(apb_s);
 `AXI_LINE(cfg_s);
 `AXI_LINE(err_s);
@@ -151,6 +164,22 @@ cpu_wrapper #(
     .debug_output_data(debug_output_data)
 );
 
+    (*mark_debug = "true"*) wire cpu_master_ar_valid = cpu_m.ar_valid ;
+    (*mark_debug = "true"*) wire cpu_master_ar_ready = cpu_m.ar_ready ;
+    (*mark_debug = "true"*) wire cpu_master_r_valid  = cpu_m.r_valid  ;
+    (*mark_debug = "true"*) wire cpu_master_r_ready  = cpu_m.r_ready  ;
+    (*mark_debug = "true"*) wire cpu_master_aw_valid = cpu_m.aw_valid ;
+    (*mark_debug = "true"*) wire cpu_master_aw_ready = cpu_m.aw_ready ;
+    (*mark_debug = "true"*) wire cpu_master_w_valid  = cpu_m.w_valid  ;
+    (*mark_debug = "true"*) wire cpu_master_w_ready  = cpu_m.w_ready  ;
+    (*mark_debug = "true"*) wire cpu_master_b_valid  = cpu_m.b_valid  ;
+    (*mark_debug = "true"*) wire cpu_master_b_ready  = cpu_m.b_ready  ;
+
+    (*mark_debug = "true"*) wire [3:0] cpu_master_ar_id = cpu_m.ar_id ;
+    (*mark_debug = "true"*) wire [3:0] cpu_master_r_id  = cpu_m.r_id  ;
+    (*mark_debug = "true"*) wire [3:0] cpu_master_aw_id = cpu_m.aw_id ;
+    (*mark_debug = "true"*) wire [3:0] cpu_master_b_id  = cpu_m.b_id  ;
+
 function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
     automatic logic [3:0] select;
     if (addr[31:27] == 5'b0) // MIG
@@ -167,6 +196,12 @@ function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
         select = 6;
     else if (addr[31:16]==16'h1fe1) // SD Controller
         select = 7;
+    else if (addr[31:16]==16'h1c01) // VGA Controller
+        select = 8;
+    else if (addr[31:16]==16'h1c06) // Framebuffer Reader
+        select = 9;
+    else if (addr[31:16]==16'h1c07) // Framebuffer Writer
+        select = 10;
     else // ERROR
         select = 0;
     return select;
@@ -176,7 +211,7 @@ my_axi_demux_intf #(
     .AXI_ID_WIDTH(4),
     .AXI_ADDR_WIDTH(32),
     .AXI_DATA_WIDTH(32),
-    .NO_MST_PORTS(8),
+    .NO_MST_PORTS(11),
     .MAX_TRANS(2),
     .AXI_LOOK_BITS(2),
     .FALL_THROUGH(1)
@@ -194,15 +229,18 @@ my_axi_demux_intf #(
     .mst4(eth_s),
     .mst5(spi_s),
     .mst6(intc_s),
-    .mst7(sdc_s)
+    .mst7(sdc_s),
+    .mst8(vga_s),
+    .mst9(fbr_s),
+    .mst10(fbw_s)
 );
 
-axi_mux_intf #(
+my_axi_mux_intf #(
     .SLV_AXI_ID_WIDTH(4),
-    .MST_AXI_ID_WIDTH(6),
+    .MST_AXI_ID_WIDTH(7),
     .AXI_ADDR_WIDTH(32),
     .AXI_DATA_WIDTH(32),
-    .NO_SLV_PORTS(3),
+    .NO_SLV_PORTS(5),
     .MAX_W_TRANS(2),
     .FALL_THROUGH(1)
 ) mem_mux (
@@ -211,6 +249,9 @@ axi_mux_intf #(
     .test_i(1'b0),
     .slv0(sdc_dma_m),
     .slv1(mem_m),
+    .slv2(vga_dma_m),
+    .slv3(fbr_dma_m),
+    .slv4(fbw_dma_m),
     .mst(mig_s)
 );
 
@@ -269,6 +310,32 @@ sdc_wrapper sdc(
     .sd_cmd_o(sd_cmd_o),
     .sd_cmd_t(sd_cmd_t),
     .sd_clk(sd_clk)
+);
+
+vga_wrapper vga(
+    .aclk(soc_clk),
+    .aresetn(aresetn),
+
+    .slv(vga_s),
+    .dma_mst(vga_dma_m),
+
+    .vga_r(vga_r),  // output wire [3 : 0] vga_r
+    .vga_g(vga_g),  // output wire [3 : 0] vga_g
+    .vga_b(vga_b),  // output wire [3 : 0] vga_b
+    .vga_hsync(vga_hsync),
+    .vga_vsync(vga_vsync),
+    .vga_clk(vga_clk)
+);
+
+framebuffer_wrapper fb(
+    .aclk(soc_clk),
+    .aresetn(aresetn),
+    .ctl_reg1(32'h8000_0000),
+
+    .slv_read(fbr_s),
+    .slv_write(fbw_s),
+    .dma_mst_read(fbr_dma_m),
+    .dma_mst_write(fbw_dma_m)
 );
 
 //confreg

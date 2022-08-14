@@ -46,6 +46,12 @@ module mchip_top (
     
     output        MDC,                  // MDIO 时钟（RMII 管理总线），由 SoC 时钟分频得到
     inout         MDIO,                 // MDIO 数据
+
+    output [3:0]  VGA_R,
+    output [3:0]  VGA_G,
+    output [3:0]  VGA_B,
+    output        VGA_HSYNC,
+    output        VGA_VSYNC,
     
     inout  [3:0]  SD_DAT,               // SDIO 数据输入 / 输出
     inout         SD_CMD,               // SDIO 指令输入 / 输出
@@ -65,20 +71,21 @@ wire soc_clk;
 wire soc_aresetn;
 `IPAD_GEN_SIMPLE(sys_rstn)
 
-wire mem_sys_clk, mem_ref_clk, cpu_clk;
+wire mem_sys_clk, mem_ref_clk, cpu_clk, vga_clk;
 wire clk_locked;
 
   clk_wiz_1 clk_gen_1
    (
     // Clock out ports
-    .mem_ref_clk(mem_ref_clk),     // output mem_ref_clk
-        .mem_sys_clk(mem_sys_clk),     // output mem_sys_clk
-    .cpu_clk(cpu_clk),     // output cpu_clk
+    .mem_ref_clk(mem_ref_clk),      // output mem_ref_clk
+    .mem_sys_clk(mem_sys_clk),      // output mem_sys_clk
+    .cpu_clk(cpu_clk),              // output cpu_clk
+    .vga_clk(vga_clk),              // ouptut vga_clk
     // Status and control signals
-    .resetn(sys_rstn_c), // input resetn
+    .resetn(sys_rstn_c),            // input resetn
     .locked(clk_locked),
-   // Clock in ports
-    .clk_in1(clk_100m));      // input clk_in1
+    // Clock in ports
+    .clk_in1(clk_100m));            // input clk_in1
 
 
 // WARNING: en==0 means output, en==1 means input!!!
@@ -108,6 +115,12 @@ wire clk_locked;
 `OPAD_GEN_SIMPLE(MDC)
 `IOBUF_GEN_SIMPLE(MDIO)
 
+`OPAD_GEN_VEC_SIMPLE(VGA_R)
+`OPAD_GEN_VEC_SIMPLE(VGA_G)
+`OPAD_GEN_VEC_SIMPLE(VGA_B)
+`OPAD_GEN_SIMPLE(VGA_HSYNC)
+`OPAD_GEN_SIMPLE(VGA_VSYNC)
+
 `OPAD_GEN_SIMPLE(SD_CLK)
 `IOBUF_GEN_SIMPLE(SD_CMD)
 `IOBUF_GEN_VEC_UNIFORM_SIMPLE(SD_DAT)
@@ -121,7 +134,7 @@ wire clk_locked;
 
 assign i2c_sda_t = i2c_sda_o;
 
-wire [5:0]  mem_axi_awid;
+wire [6:0]  mem_axi_awid;
 wire [31:0] mem_axi_awaddr;
 wire [7:0]  mem_axi_awlen;
 wire [2:0]  mem_axi_awsize;
@@ -134,10 +147,10 @@ wire        mem_axi_wlast;
 wire        mem_axi_wvalid;
 wire        mem_axi_wready;
 wire        mem_axi_bready;
-wire  [5:0] mem_axi_bid;
+wire  [6:0] mem_axi_bid;
 wire  [1:0] mem_axi_bresp;
 wire        mem_axi_bvalid;
-wire [5:0]  mem_axi_arid;
+wire [6:0]  mem_axi_arid;
 wire [31:0] mem_axi_araddr;
 wire [7:0]  mem_axi_arlen;
 wire [2:0]  mem_axi_arsize;
@@ -145,7 +158,7 @@ wire [1:0]  mem_axi_arburst;
 wire        mem_axi_arvalid;
 wire        mem_axi_arready;
 wire        mem_axi_rready;
-wire [5:0]  mem_axi_rid;
+wire [6:0]  mem_axi_rid;
 wire [31:0] mem_axi_rdata;
 wire [1:0]  mem_axi_rresp;
 wire        mem_axi_rlast;
@@ -302,6 +315,14 @@ soc_top #(
     .md_i_0       (MDIO_i   ),
     .md_o_0       (MDIO_o   ),       
     .md_t_0       (MDIO_t   ),
+
+    // VGA
+    .vga_r      (VGA_R_c),
+    .vga_g      (VGA_G_c),
+    .vga_b      (VGA_B_c),
+    .vga_hsync  (VGA_HSYNC_c),
+    .vga_vsync  (VGA_VSYNC_c),
+    .vga_clk    (vga_clk),  // input
     
     .sd_dat_i(SD_DAT_i),
     .sd_dat_o(SD_DAT_o),

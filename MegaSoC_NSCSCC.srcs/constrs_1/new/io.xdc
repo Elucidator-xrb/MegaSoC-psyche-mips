@@ -74,3 +74,23 @@ set_property -dict {PACKAGE_PIN T20 IOSTANDARD LVCMOS33} [get_ports CDBUS_tx_en]
 set_property -dict {PACKAGE_PIN AD25 IOSTANDARD LVCMOS33} [get_ports i2cm_scl]
 # FPGA_EXT0_IO4
 set_property -dict {PACKAGE_PIN AE25 IOSTANDARD LVCMOS33} [get_ports i2cm_sda]
+
+# vga interface (DAC with resistors)
+# red
+set_property -dict {PACKAGE_PIN U4 IOSTANDARD LVCMOS33} [get_ports {VGA_R[3]}]
+set_property -dict {PACKAGE_PIN U2 IOSTANDARD LVCMOS33} [get_ports {VGA_R[2]}]
+set_property -dict {PACKAGE_PIN T2 IOSTANDARD LVCMOS33} [get_ports {VGA_R[1]}]
+set_property -dict {PACKAGE_PIN T3 IOSTANDARD LVCMOS33} [get_ports {VGA_R[0]}]
+# green
+set_property -dict {PACKAGE_PIN R5 IOSTANDARD LVCMOS33} [get_ports {VGA_G[3]}]
+set_property -dict {PACKAGE_PIN U1 IOSTANDARD LVCMOS33} [get_ports {VGA_G[2]}]
+set_property -dict {PACKAGE_PIN R1 IOSTANDARD LVCMOS33} [get_ports {VGA_G[1]}]
+set_property -dict {PACKAGE_PIN R2 IOSTANDARD LVCMOS33} [get_ports {VGA_G[0]}]
+# blue
+set_property -dict {PACKAGE_PIN P3 IOSTANDARD LVCMOS33} [get_ports {VGA_B[3]}]
+set_property -dict {PACKAGE_PIN P1 IOSTANDARD LVCMOS33} [get_ports {VGA_B[2]}]
+set_property -dict {PACKAGE_PIN N1 IOSTANDARD LVCMOS33} [get_ports {VGA_B[1]}]
+set_property -dict {PACKAGE_PIN P5 IOSTANDARD LVCMOS33} [get_ports {VGA_B[0]}]
+# sync
+set_property -dict {PACKAGE_PIN U5 IOSTANDARD LVCMOS33} [get_ports VGA_HSYNC]
+set_property -dict {PACKAGE_PIN U6 IOSTANDARD LVCMOS33} [get_ports VGA_VSYNC]

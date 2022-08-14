@@ -767,8 +767,8 @@ module my_axi_demux_intf #(
   input  logic    clk_i,                 // Clock
   input  logic    rst_ni,                // Asynchronous reset active low
   input  logic    test_i,                // Testmode enable
-  input  select_t slv_aw_select_i,       // has to be stable, when aw_valid
-  input  select_t slv_ar_select_i,       // has to be stable, when ar_valid
+  (*mark_debug = "true"*)input  select_t slv_aw_select_i,       // has to be stable, when aw_valid
+  (*mark_debug = "true"*)input  select_t slv_ar_select_i,       // has to be stable, when ar_valid
   AXI_BUS.Slave   slv,                   // slave port
   AXI_BUS.Master  mst0,
   AXI_BUS.Master  mst1,
@@ -777,7 +777,10 @@ module my_axi_demux_intf #(
   AXI_BUS.Master  mst4,
   AXI_BUS.Master  mst5,
   AXI_BUS.Master  mst6,
-  AXI_BUS.Master  mst7
+  AXI_BUS.Master  mst7,
+  AXI_BUS.Master  mst8,
+  AXI_BUS.Master  mst9,
+  AXI_BUS.Master  mst10
 );
 
   typedef logic [AXI_ID_WIDTH-1:0]       id_t;
@@ -810,6 +813,9 @@ module my_axi_demux_intf #(
   `AXI_ASSIGN_MST(5)
   `AXI_ASSIGN_MST(6)
   `AXI_ASSIGN_MST(7)
+  `AXI_ASSIGN_MST(8)
+  `AXI_ASSIGN_MST(9)
+  `AXI_ASSIGN_MST(10)
 
   axi_demux #(
     .AxiIdWidth     ( AXI_ID_WIDTH  ), // ID Width
