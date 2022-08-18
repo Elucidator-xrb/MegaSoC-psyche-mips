@@ -68,6 +68,7 @@ module mchip_top (
 );
 
 wire soc_clk;
+wire ui_clk;
 wire soc_aresetn;
 `IPAD_GEN_SIMPLE(sys_rstn)
 
@@ -81,6 +82,7 @@ wire clk_locked;
     .mem_sys_clk(mem_sys_clk),      // output mem_sys_clk
     .cpu_clk(cpu_clk),              // output cpu_clk
     .vga_clk(vga_clk),              // ouptut vga_clk
+    .soc_clk(soc_clk),
     // Status and control signals
     .resetn(sys_rstn_c),            // input resetn
     .locked(clk_locked),
@@ -184,7 +186,7 @@ wire mig_ui_sync_rst;
     .ddr3_dm                        (ddr3_dm),  // output [1:0]		ddr3_dm
     .ddr3_odt                       (ddr3_odt),  // output [0:0]		ddr3_odt
     // Application interface ports
-    .ui_clk                         (soc_clk),  // output			ui_clk
+    .ui_clk                         (ui_clk),  // output			ui_clk
     .ui_clk_sync_rst                (mig_ui_sync_rst),  // output			ui_clk_sync_rst
     .aresetn                        (soc_aresetn),  // input			aresetn
 
@@ -249,7 +251,8 @@ soc_top #(
 ) soc (
     .soc_clk(soc_clk),
     .cpu_clk(cpu_clk),
-    .aresetn(soc_aresetn),
+    .mig_aresetn(soc_aresetn),
+    .mig_clk(ui_clk),
     
     .mem_axi_awid(mem_axi_awid),
     .mem_axi_awaddr(mem_axi_awaddr),

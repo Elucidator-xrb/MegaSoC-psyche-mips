@@ -194,7 +194,7 @@ wire [31:0] debug_wb_instr;
 wire [31:0] debug_wb_rf_wdata;
 
 // cpu
-mycpu_top #(.IMPLEMENT_LIKELY(1), .C_ASIC_SRAM(C_ASIC_SRAM)) cpu_mid (
+mycpu_mega_top  cpu_mid (
   .aclk         (cpu_clk),
   .ext_int      ({4'b0, int_cpu}),  //232 only 5bit
   .aresetn      (cpu_aresetn    ),

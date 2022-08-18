@@ -81,203 +81,339 @@ connect_debug_port u_ila_1/probe48 [get_nets [list soc/vga/dma_master_w_valid]]
 
 
 
+connect_debug_port u_ila_0/probe0 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_rf_wnum[0]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[1]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[2]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[3]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[4]}]]
+connect_debug_port u_ila_0/probe1 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_rf_wen[0]} {soc/cpu/cpu_mid/_debug_wb_rf_wen[1]} {soc/cpu/cpu_mid/_debug_wb_rf_wen[2]} {soc/cpu/cpu_mid/_debug_wb_rf_wen[3]}]]
+connect_debug_port u_ila_0/probe2 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_rf_wdata[0]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[1]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[2]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[3]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[4]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[5]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[6]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[7]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[8]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[9]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[10]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[11]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[12]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[13]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[14]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[15]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[16]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[17]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[18]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[19]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[20]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[21]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[22]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[23]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[24]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[25]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[26]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[27]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[28]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[29]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[30]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[31]}]]
+connect_debug_port u_ila_0/probe3 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_instr[0]} {soc/cpu/cpu_mid/_debug_wb_instr[1]} {soc/cpu/cpu_mid/_debug_wb_instr[2]} {soc/cpu/cpu_mid/_debug_wb_instr[3]} {soc/cpu/cpu_mid/_debug_wb_instr[4]} {soc/cpu/cpu_mid/_debug_wb_instr[5]} {soc/cpu/cpu_mid/_debug_wb_instr[6]} {soc/cpu/cpu_mid/_debug_wb_instr[7]} {soc/cpu/cpu_mid/_debug_wb_instr[8]} {soc/cpu/cpu_mid/_debug_wb_instr[9]} {soc/cpu/cpu_mid/_debug_wb_instr[10]} {soc/cpu/cpu_mid/_debug_wb_instr[11]} {soc/cpu/cpu_mid/_debug_wb_instr[12]} {soc/cpu/cpu_mid/_debug_wb_instr[13]} {soc/cpu/cpu_mid/_debug_wb_instr[14]} {soc/cpu/cpu_mid/_debug_wb_instr[15]} {soc/cpu/cpu_mid/_debug_wb_instr[16]} {soc/cpu/cpu_mid/_debug_wb_instr[17]} {soc/cpu/cpu_mid/_debug_wb_instr[18]} {soc/cpu/cpu_mid/_debug_wb_instr[19]} {soc/cpu/cpu_mid/_debug_wb_instr[20]} {soc/cpu/cpu_mid/_debug_wb_instr[21]} {soc/cpu/cpu_mid/_debug_wb_instr[22]} {soc/cpu/cpu_mid/_debug_wb_instr[23]} {soc/cpu/cpu_mid/_debug_wb_instr[24]} {soc/cpu/cpu_mid/_debug_wb_instr[25]} {soc/cpu/cpu_mid/_debug_wb_instr[26]} {soc/cpu/cpu_mid/_debug_wb_instr[27]} {soc/cpu/cpu_mid/_debug_wb_instr[28]} {soc/cpu/cpu_mid/_debug_wb_instr[29]} {soc/cpu/cpu_mid/_debug_wb_instr[30]} {soc/cpu/cpu_mid/_debug_wb_instr[31]}]]
+connect_debug_port u_ila_0/probe4 [get_nets [list {soc/cpu/cpu_mid/_debug_i_pc[0]} {soc/cpu/cpu_mid/_debug_i_pc[1]} {soc/cpu/cpu_mid/_debug_i_pc[2]} {soc/cpu/cpu_mid/_debug_i_pc[3]} {soc/cpu/cpu_mid/_debug_i_pc[4]} {soc/cpu/cpu_mid/_debug_i_pc[5]} {soc/cpu/cpu_mid/_debug_i_pc[6]} {soc/cpu/cpu_mid/_debug_i_pc[7]} {soc/cpu/cpu_mid/_debug_i_pc[8]} {soc/cpu/cpu_mid/_debug_i_pc[9]} {soc/cpu/cpu_mid/_debug_i_pc[10]} {soc/cpu/cpu_mid/_debug_i_pc[11]} {soc/cpu/cpu_mid/_debug_i_pc[12]} {soc/cpu/cpu_mid/_debug_i_pc[13]} {soc/cpu/cpu_mid/_debug_i_pc[14]} {soc/cpu/cpu_mid/_debug_i_pc[15]} {soc/cpu/cpu_mid/_debug_i_pc[16]} {soc/cpu/cpu_mid/_debug_i_pc[17]} {soc/cpu/cpu_mid/_debug_i_pc[18]} {soc/cpu/cpu_mid/_debug_i_pc[19]} {soc/cpu/cpu_mid/_debug_i_pc[20]} {soc/cpu/cpu_mid/_debug_i_pc[21]} {soc/cpu/cpu_mid/_debug_i_pc[22]} {soc/cpu/cpu_mid/_debug_i_pc[23]} {soc/cpu/cpu_mid/_debug_i_pc[24]} {soc/cpu/cpu_mid/_debug_i_pc[25]} {soc/cpu/cpu_mid/_debug_i_pc[26]} {soc/cpu/cpu_mid/_debug_i_pc[27]} {soc/cpu/cpu_mid/_debug_i_pc[28]} {soc/cpu/cpu_mid/_debug_i_pc[29]} {soc/cpu/cpu_mid/_debug_i_pc[30]} {soc/cpu/cpu_mid/_debug_i_pc[31]}]]
+connect_debug_port u_ila_0/probe5 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_pc[0]} {soc/cpu/cpu_mid/_debug_wb_pc[1]} {soc/cpu/cpu_mid/_debug_wb_pc[2]} {soc/cpu/cpu_mid/_debug_wb_pc[3]} {soc/cpu/cpu_mid/_debug_wb_pc[4]} {soc/cpu/cpu_mid/_debug_wb_pc[5]} {soc/cpu/cpu_mid/_debug_wb_pc[6]} {soc/cpu/cpu_mid/_debug_wb_pc[7]} {soc/cpu/cpu_mid/_debug_wb_pc[8]} {soc/cpu/cpu_mid/_debug_wb_pc[9]} {soc/cpu/cpu_mid/_debug_wb_pc[10]} {soc/cpu/cpu_mid/_debug_wb_pc[11]} {soc/cpu/cpu_mid/_debug_wb_pc[12]} {soc/cpu/cpu_mid/_debug_wb_pc[13]} {soc/cpu/cpu_mid/_debug_wb_pc[14]} {soc/cpu/cpu_mid/_debug_wb_pc[15]} {soc/cpu/cpu_mid/_debug_wb_pc[16]} {soc/cpu/cpu_mid/_debug_wb_pc[17]} {soc/cpu/cpu_mid/_debug_wb_pc[18]} {soc/cpu/cpu_mid/_debug_wb_pc[19]} {soc/cpu/cpu_mid/_debug_wb_pc[20]} {soc/cpu/cpu_mid/_debug_wb_pc[21]} {soc/cpu/cpu_mid/_debug_wb_pc[22]} {soc/cpu/cpu_mid/_debug_wb_pc[23]} {soc/cpu/cpu_mid/_debug_wb_pc[24]} {soc/cpu/cpu_mid/_debug_wb_pc[25]} {soc/cpu/cpu_mid/_debug_wb_pc[26]} {soc/cpu/cpu_mid/_debug_wb_pc[27]} {soc/cpu/cpu_mid/_debug_wb_pc[28]} {soc/cpu/cpu_mid/_debug_wb_pc[29]} {soc/cpu/cpu_mid/_debug_wb_pc[30]} {soc/cpu/cpu_mid/_debug_wb_pc[31]}]]
+connect_debug_port u_ila_0/probe6 [get_nets [list {soc/cpu/cpu_mid/_debug_i_instr[0]} {soc/cpu/cpu_mid/_debug_i_instr[1]} {soc/cpu/cpu_mid/_debug_i_instr[2]} {soc/cpu/cpu_mid/_debug_i_instr[3]} {soc/cpu/cpu_mid/_debug_i_instr[4]} {soc/cpu/cpu_mid/_debug_i_instr[5]} {soc/cpu/cpu_mid/_debug_i_instr[6]} {soc/cpu/cpu_mid/_debug_i_instr[7]} {soc/cpu/cpu_mid/_debug_i_instr[8]} {soc/cpu/cpu_mid/_debug_i_instr[9]} {soc/cpu/cpu_mid/_debug_i_instr[10]} {soc/cpu/cpu_mid/_debug_i_instr[11]} {soc/cpu/cpu_mid/_debug_i_instr[12]} {soc/cpu/cpu_mid/_debug_i_instr[13]} {soc/cpu/cpu_mid/_debug_i_instr[14]} {soc/cpu/cpu_mid/_debug_i_instr[15]} {soc/cpu/cpu_mid/_debug_i_instr[16]} {soc/cpu/cpu_mid/_debug_i_instr[17]} {soc/cpu/cpu_mid/_debug_i_instr[18]} {soc/cpu/cpu_mid/_debug_i_instr[19]} {soc/cpu/cpu_mid/_debug_i_instr[20]} {soc/cpu/cpu_mid/_debug_i_instr[21]} {soc/cpu/cpu_mid/_debug_i_instr[22]} {soc/cpu/cpu_mid/_debug_i_instr[23]} {soc/cpu/cpu_mid/_debug_i_instr[24]} {soc/cpu/cpu_mid/_debug_i_instr[25]} {soc/cpu/cpu_mid/_debug_i_instr[26]} {soc/cpu/cpu_mid/_debug_i_instr[27]} {soc/cpu/cpu_mid/_debug_i_instr[28]} {soc/cpu/cpu_mid/_debug_i_instr[29]} {soc/cpu/cpu_mid/_debug_i_instr[30]} {soc/cpu/cpu_mid/_debug_i_instr[31]}]]
+
+
+
 create_debug_core u_ila_0 ila
 set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
-set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
 set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
-set_property C_DATA_DEPTH 4096 [get_debug_cores u_ila_0]
-set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 2048 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
 set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
 set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
 set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
 set_property port_width 1 [get_debug_ports u_ila_0/clk]
 connect_debug_port u_ila_0/clk [get_nets [list clk_gen_1/inst/cpu_clk]]
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe0]
-set_property port_width 5 [get_debug_ports u_ila_0/probe0]
-connect_debug_port u_ila_0/probe0 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_rf_wnum[0]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[1]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[2]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[3]} {soc/cpu/cpu_mid/_debug_wb_rf_wnum[4]}]]
+set_property port_width 32 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_BadVAddr[31]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe1]
-set_property port_width 4 [get_debug_ports u_ila_0/probe1]
-connect_debug_port u_ila_0/probe1 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_rf_wen[0]} {soc/cpu/cpu_mid/_debug_wb_rf_wen[1]} {soc/cpu/cpu_mid/_debug_wb_rf_wen[2]} {soc/cpu/cpu_mid/_debug_wb_rf_wen[3]}]]
+set_property port_width 32 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Cause[31]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe2]
 set_property port_width 32 [get_debug_ports u_ila_0/probe2]
-connect_debug_port u_ila_0/probe2 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_rf_wdata[0]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[1]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[2]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[3]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[4]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[5]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[6]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[7]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[8]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[9]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[10]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[11]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[12]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[13]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[14]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[15]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[16]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[17]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[18]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[19]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[20]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[21]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[22]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[23]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[24]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[25]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[26]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[27]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[28]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[29]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[30]} {soc/cpu/cpu_mid/_debug_wb_rf_wdata[31]}]]
+connect_debug_port u_ila_0/probe2 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Compare[31]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe3]
 set_property port_width 32 [get_debug_ports u_ila_0/probe3]
-connect_debug_port u_ila_0/probe3 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_instr[0]} {soc/cpu/cpu_mid/_debug_wb_instr[1]} {soc/cpu/cpu_mid/_debug_wb_instr[2]} {soc/cpu/cpu_mid/_debug_wb_instr[3]} {soc/cpu/cpu_mid/_debug_wb_instr[4]} {soc/cpu/cpu_mid/_debug_wb_instr[5]} {soc/cpu/cpu_mid/_debug_wb_instr[6]} {soc/cpu/cpu_mid/_debug_wb_instr[7]} {soc/cpu/cpu_mid/_debug_wb_instr[8]} {soc/cpu/cpu_mid/_debug_wb_instr[9]} {soc/cpu/cpu_mid/_debug_wb_instr[10]} {soc/cpu/cpu_mid/_debug_wb_instr[11]} {soc/cpu/cpu_mid/_debug_wb_instr[12]} {soc/cpu/cpu_mid/_debug_wb_instr[13]} {soc/cpu/cpu_mid/_debug_wb_instr[14]} {soc/cpu/cpu_mid/_debug_wb_instr[15]} {soc/cpu/cpu_mid/_debug_wb_instr[16]} {soc/cpu/cpu_mid/_debug_wb_instr[17]} {soc/cpu/cpu_mid/_debug_wb_instr[18]} {soc/cpu/cpu_mid/_debug_wb_instr[19]} {soc/cpu/cpu_mid/_debug_wb_instr[20]} {soc/cpu/cpu_mid/_debug_wb_instr[21]} {soc/cpu/cpu_mid/_debug_wb_instr[22]} {soc/cpu/cpu_mid/_debug_wb_instr[23]} {soc/cpu/cpu_mid/_debug_wb_instr[24]} {soc/cpu/cpu_mid/_debug_wb_instr[25]} {soc/cpu/cpu_mid/_debug_wb_instr[26]} {soc/cpu/cpu_mid/_debug_wb_instr[27]} {soc/cpu/cpu_mid/_debug_wb_instr[28]} {soc/cpu/cpu_mid/_debug_wb_instr[29]} {soc/cpu/cpu_mid/_debug_wb_instr[30]} {soc/cpu/cpu_mid/_debug_wb_instr[31]}]]
+connect_debug_port u_ila_0/probe3 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Count[31]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe4]
 set_property port_width 32 [get_debug_ports u_ila_0/probe4]
-connect_debug_port u_ila_0/probe4 [get_nets [list {soc/cpu/cpu_mid/_debug_i_pc[0]} {soc/cpu/cpu_mid/_debug_i_pc[1]} {soc/cpu/cpu_mid/_debug_i_pc[2]} {soc/cpu/cpu_mid/_debug_i_pc[3]} {soc/cpu/cpu_mid/_debug_i_pc[4]} {soc/cpu/cpu_mid/_debug_i_pc[5]} {soc/cpu/cpu_mid/_debug_i_pc[6]} {soc/cpu/cpu_mid/_debug_i_pc[7]} {soc/cpu/cpu_mid/_debug_i_pc[8]} {soc/cpu/cpu_mid/_debug_i_pc[9]} {soc/cpu/cpu_mid/_debug_i_pc[10]} {soc/cpu/cpu_mid/_debug_i_pc[11]} {soc/cpu/cpu_mid/_debug_i_pc[12]} {soc/cpu/cpu_mid/_debug_i_pc[13]} {soc/cpu/cpu_mid/_debug_i_pc[14]} {soc/cpu/cpu_mid/_debug_i_pc[15]} {soc/cpu/cpu_mid/_debug_i_pc[16]} {soc/cpu/cpu_mid/_debug_i_pc[17]} {soc/cpu/cpu_mid/_debug_i_pc[18]} {soc/cpu/cpu_mid/_debug_i_pc[19]} {soc/cpu/cpu_mid/_debug_i_pc[20]} {soc/cpu/cpu_mid/_debug_i_pc[21]} {soc/cpu/cpu_mid/_debug_i_pc[22]} {soc/cpu/cpu_mid/_debug_i_pc[23]} {soc/cpu/cpu_mid/_debug_i_pc[24]} {soc/cpu/cpu_mid/_debug_i_pc[25]} {soc/cpu/cpu_mid/_debug_i_pc[26]} {soc/cpu/cpu_mid/_debug_i_pc[27]} {soc/cpu/cpu_mid/_debug_i_pc[28]} {soc/cpu/cpu_mid/_debug_i_pc[29]} {soc/cpu/cpu_mid/_debug_i_pc[30]} {soc/cpu/cpu_mid/_debug_i_pc[31]}]]
+connect_debug_port u_ila_0/probe4 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][3]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][4]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][5]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][6]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][7]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][8]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][9]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][10]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][11]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][12]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][13]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][14]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][15]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][16]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][17]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][18]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][19]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][20]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][21]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][22]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][23]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][24]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][25]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][26]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][27]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][28]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][29]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][30]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_addr][31]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe5]
-set_property port_width 32 [get_debug_ports u_ila_0/probe5]
-connect_debug_port u_ila_0/probe5 [get_nets [list {soc/cpu/cpu_mid/_debug_wb_pc[0]} {soc/cpu/cpu_mid/_debug_wb_pc[1]} {soc/cpu/cpu_mid/_debug_wb_pc[2]} {soc/cpu/cpu_mid/_debug_wb_pc[3]} {soc/cpu/cpu_mid/_debug_wb_pc[4]} {soc/cpu/cpu_mid/_debug_wb_pc[5]} {soc/cpu/cpu_mid/_debug_wb_pc[6]} {soc/cpu/cpu_mid/_debug_wb_pc[7]} {soc/cpu/cpu_mid/_debug_wb_pc[8]} {soc/cpu/cpu_mid/_debug_wb_pc[9]} {soc/cpu/cpu_mid/_debug_wb_pc[10]} {soc/cpu/cpu_mid/_debug_wb_pc[11]} {soc/cpu/cpu_mid/_debug_wb_pc[12]} {soc/cpu/cpu_mid/_debug_wb_pc[13]} {soc/cpu/cpu_mid/_debug_wb_pc[14]} {soc/cpu/cpu_mid/_debug_wb_pc[15]} {soc/cpu/cpu_mid/_debug_wb_pc[16]} {soc/cpu/cpu_mid/_debug_wb_pc[17]} {soc/cpu/cpu_mid/_debug_wb_pc[18]} {soc/cpu/cpu_mid/_debug_wb_pc[19]} {soc/cpu/cpu_mid/_debug_wb_pc[20]} {soc/cpu/cpu_mid/_debug_wb_pc[21]} {soc/cpu/cpu_mid/_debug_wb_pc[22]} {soc/cpu/cpu_mid/_debug_wb_pc[23]} {soc/cpu/cpu_mid/_debug_wb_pc[24]} {soc/cpu/cpu_mid/_debug_wb_pc[25]} {soc/cpu/cpu_mid/_debug_wb_pc[26]} {soc/cpu/cpu_mid/_debug_wb_pc[27]} {soc/cpu/cpu_mid/_debug_wb_pc[28]} {soc/cpu/cpu_mid/_debug_wb_pc[29]} {soc/cpu/cpu_mid/_debug_wb_pc[30]} {soc/cpu/cpu_mid/_debug_wb_pc[31]}]]
+set_property port_width 2 [get_debug_ports u_ila_0/probe5]
+connect_debug_port u_ila_0/probe5 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_burstType][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_burstType][1]}]]
 create_debug_port u_ila_0 probe
 set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe6]
-set_property port_width 32 [get_debug_ports u_ila_0/probe6]
-connect_debug_port u_ila_0/probe6 [get_nets [list {soc/cpu/cpu_mid/_debug_i_instr[0]} {soc/cpu/cpu_mid/_debug_i_instr[1]} {soc/cpu/cpu_mid/_debug_i_instr[2]} {soc/cpu/cpu_mid/_debug_i_instr[3]} {soc/cpu/cpu_mid/_debug_i_instr[4]} {soc/cpu/cpu_mid/_debug_i_instr[5]} {soc/cpu/cpu_mid/_debug_i_instr[6]} {soc/cpu/cpu_mid/_debug_i_instr[7]} {soc/cpu/cpu_mid/_debug_i_instr[8]} {soc/cpu/cpu_mid/_debug_i_instr[9]} {soc/cpu/cpu_mid/_debug_i_instr[10]} {soc/cpu/cpu_mid/_debug_i_instr[11]} {soc/cpu/cpu_mid/_debug_i_instr[12]} {soc/cpu/cpu_mid/_debug_i_instr[13]} {soc/cpu/cpu_mid/_debug_i_instr[14]} {soc/cpu/cpu_mid/_debug_i_instr[15]} {soc/cpu/cpu_mid/_debug_i_instr[16]} {soc/cpu/cpu_mid/_debug_i_instr[17]} {soc/cpu/cpu_mid/_debug_i_instr[18]} {soc/cpu/cpu_mid/_debug_i_instr[19]} {soc/cpu/cpu_mid/_debug_i_instr[20]} {soc/cpu/cpu_mid/_debug_i_instr[21]} {soc/cpu/cpu_mid/_debug_i_instr[22]} {soc/cpu/cpu_mid/_debug_i_instr[23]} {soc/cpu/cpu_mid/_debug_i_instr[24]} {soc/cpu/cpu_mid/_debug_i_instr[25]} {soc/cpu/cpu_mid/_debug_i_instr[26]} {soc/cpu/cpu_mid/_debug_i_instr[27]} {soc/cpu/cpu_mid/_debug_i_instr[28]} {soc/cpu/cpu_mid/_debug_i_instr[29]} {soc/cpu/cpu_mid/_debug_i_instr[30]} {soc/cpu/cpu_mid/_debug_i_instr[31]}]]
-create_debug_core u_ila_1 ila
-set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_1]
-set_property ALL_PROBE_SAME_MU_CNT 2 [get_debug_cores u_ila_1]
-set_property C_ADV_TRIGGER false [get_debug_cores u_ila_1]
-set_property C_DATA_DEPTH 4096 [get_debug_cores u_ila_1]
-set_property C_EN_STRG_QUAL true [get_debug_cores u_ila_1]
-set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_1]
-set_property C_TRIGIN_EN false [get_debug_cores u_ila_1]
-set_property C_TRIGOUT_EN false [get_debug_cores u_ila_1]
-set_property port_width 1 [get_debug_ports u_ila_1/clk]
-connect_debug_port u_ila_1/clk [get_nets [list u_mig_axi_32/u_mig_axi_32_mig/u_ddr3_infrastructure/gen_mmcm.mmcm_i_0]]
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe0]
-set_property port_width 4 [get_debug_ports u_ila_1/probe0]
-connect_debug_port u_ila_1/probe0 [get_nets [list {soc/cpu_master_r_id[0]} {soc/cpu_master_r_id[1]} {soc/cpu_master_r_id[2]} {soc/cpu_master_r_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe1]
-set_property port_width 4 [get_debug_ports u_ila_1/probe1]
-connect_debug_port u_ila_1/probe1 [get_nets [list {soc/cpu_master_b_id[0]} {soc/cpu_master_b_id[1]} {soc/cpu_master_b_id[2]} {soc/cpu_master_b_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe2]
-set_property port_width 4 [get_debug_ports u_ila_1/probe2]
-connect_debug_port u_ila_1/probe2 [get_nets [list {soc/cpu_master_aw_id[0]} {soc/cpu_master_aw_id[1]} {soc/cpu_master_aw_id[2]} {soc/cpu_master_aw_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe3]
-set_property port_width 4 [get_debug_ports u_ila_1/probe3]
-connect_debug_port u_ila_1/probe3 [get_nets [list {soc/cpu_master_ar_id[0]} {soc/cpu_master_ar_id[1]} {soc/cpu_master_ar_id[2]} {soc/cpu_master_ar_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe4]
-set_property port_width 4 [get_debug_ports u_ila_1/probe4]
-connect_debug_port u_ila_1/probe4 [get_nets [list {soc/vga/slave_w_strb[0]} {soc/vga/slave_w_strb[1]} {soc/vga/slave_w_strb[2]} {soc/vga/slave_w_strb[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe5]
-set_property port_width 32 [get_debug_ports u_ila_1/probe5]
-connect_debug_port u_ila_1/probe5 [get_nets [list {soc/vga/slave_w_data[0]} {soc/vga/slave_w_data[1]} {soc/vga/slave_w_data[2]} {soc/vga/slave_w_data[3]} {soc/vga/slave_w_data[4]} {soc/vga/slave_w_data[5]} {soc/vga/slave_w_data[6]} {soc/vga/slave_w_data[7]} {soc/vga/slave_w_data[8]} {soc/vga/slave_w_data[9]} {soc/vga/slave_w_data[10]} {soc/vga/slave_w_data[11]} {soc/vga/slave_w_data[12]} {soc/vga/slave_w_data[13]} {soc/vga/slave_w_data[14]} {soc/vga/slave_w_data[15]} {soc/vga/slave_w_data[16]} {soc/vga/slave_w_data[17]} {soc/vga/slave_w_data[18]} {soc/vga/slave_w_data[19]} {soc/vga/slave_w_data[20]} {soc/vga/slave_w_data[21]} {soc/vga/slave_w_data[22]} {soc/vga/slave_w_data[23]} {soc/vga/slave_w_data[24]} {soc/vga/slave_w_data[25]} {soc/vga/slave_w_data[26]} {soc/vga/slave_w_data[27]} {soc/vga/slave_w_data[28]} {soc/vga/slave_w_data[29]} {soc/vga/slave_w_data[30]} {soc/vga/slave_w_data[31]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe6]
-set_property port_width 2 [get_debug_ports u_ila_1/probe6]
-connect_debug_port u_ila_1/probe6 [get_nets [list {soc/vga/slave_r_resp[0]} {soc/vga/slave_r_resp[1]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe7]
-set_property port_width 4 [get_debug_ports u_ila_1/probe7]
-connect_debug_port u_ila_1/probe7 [get_nets [list {soc/vga/slave_r_id[0]} {soc/vga/slave_r_id[1]} {soc/vga/slave_r_id[2]} {soc/vga/slave_r_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe8]
-set_property port_width 32 [get_debug_ports u_ila_1/probe8]
-connect_debug_port u_ila_1/probe8 [get_nets [list {soc/vga/slave_r_data[0]} {soc/vga/slave_r_data[1]} {soc/vga/slave_r_data[2]} {soc/vga/slave_r_data[3]} {soc/vga/slave_r_data[4]} {soc/vga/slave_r_data[5]} {soc/vga/slave_r_data[6]} {soc/vga/slave_r_data[7]} {soc/vga/slave_r_data[8]} {soc/vga/slave_r_data[9]} {soc/vga/slave_r_data[10]} {soc/vga/slave_r_data[11]} {soc/vga/slave_r_data[12]} {soc/vga/slave_r_data[13]} {soc/vga/slave_r_data[14]} {soc/vga/slave_r_data[15]} {soc/vga/slave_r_data[16]} {soc/vga/slave_r_data[17]} {soc/vga/slave_r_data[18]} {soc/vga/slave_r_data[19]} {soc/vga/slave_r_data[20]} {soc/vga/slave_r_data[21]} {soc/vga/slave_r_data[22]} {soc/vga/slave_r_data[23]} {soc/vga/slave_r_data[24]} {soc/vga/slave_r_data[25]} {soc/vga/slave_r_data[26]} {soc/vga/slave_r_data[27]} {soc/vga/slave_r_data[28]} {soc/vga/slave_r_data[29]} {soc/vga/slave_r_data[30]} {soc/vga/slave_r_data[31]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe9]
-set_property port_width 2 [get_debug_ports u_ila_1/probe9]
-connect_debug_port u_ila_1/probe9 [get_nets [list {soc/vga/slave_b_resp[0]} {soc/vga/slave_b_resp[1]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe10]
-set_property port_width 4 [get_debug_ports u_ila_1/probe10]
-connect_debug_port u_ila_1/probe10 [get_nets [list {soc/vga/slave_b_id[0]} {soc/vga/slave_b_id[1]} {soc/vga/slave_b_id[2]} {soc/vga/slave_b_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe11]
-set_property port_width 4 [get_debug_ports u_ila_1/probe11]
-connect_debug_port u_ila_1/probe11 [get_nets [list {soc/vga/slave_aw_id[0]} {soc/vga/slave_aw_id[1]} {soc/vga/slave_aw_id[2]} {soc/vga/slave_aw_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe12]
-set_property port_width 4 [get_debug_ports u_ila_1/probe12]
-connect_debug_port u_ila_1/probe12 [get_nets [list {soc/vga/slave_aw_addr[0]} {soc/vga/slave_aw_addr[1]} {soc/vga/slave_aw_addr[2]} {soc/vga/slave_aw_addr[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe13]
-set_property port_width 4 [get_debug_ports u_ila_1/probe13]
-connect_debug_port u_ila_1/probe13 [get_nets [list {soc/vga/slave_ar_id[0]} {soc/vga/slave_ar_id[1]} {soc/vga/slave_ar_id[2]} {soc/vga/slave_ar_id[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe14]
-set_property port_width 4 [get_debug_ports u_ila_1/probe14]
-connect_debug_port u_ila_1/probe14 [get_nets [list {soc/vga/slave_ar_addr[0]} {soc/vga/slave_ar_addr[1]} {soc/vga/slave_ar_addr[2]} {soc/vga/slave_ar_addr[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe15]
-set_property port_width 4 [get_debug_ports u_ila_1/probe15]
-connect_debug_port u_ila_1/probe15 [get_nets [list {soc/cpu_demux/slv_aw_select_i[0]} {soc/cpu_demux/slv_aw_select_i[1]} {soc/cpu_demux/slv_aw_select_i[2]} {soc/cpu_demux/slv_aw_select_i[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe16]
-set_property port_width 4 [get_debug_ports u_ila_1/probe16]
-connect_debug_port u_ila_1/probe16 [get_nets [list {soc/cpu_demux/slv_ar_select_i[0]} {soc/cpu_demux/slv_ar_select_i[1]} {soc/cpu_demux/slv_ar_select_i[2]} {soc/cpu_demux/slv_ar_select_i[3]}]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe17]
-set_property port_width 1 [get_debug_ports u_ila_1/probe17]
-connect_debug_port u_ila_1/probe17 [get_nets [list soc/cpu_master_ar_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe18]
-set_property port_width 1 [get_debug_ports u_ila_1/probe18]
-connect_debug_port u_ila_1/probe18 [get_nets [list soc/cpu_master_ar_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe19]
-set_property port_width 1 [get_debug_ports u_ila_1/probe19]
-connect_debug_port u_ila_1/probe19 [get_nets [list soc/cpu_master_aw_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe20]
-set_property port_width 1 [get_debug_ports u_ila_1/probe20]
-connect_debug_port u_ila_1/probe20 [get_nets [list soc/cpu_master_aw_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe21]
-set_property port_width 1 [get_debug_ports u_ila_1/probe21]
-connect_debug_port u_ila_1/probe21 [get_nets [list soc/cpu_master_b_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe22]
-set_property port_width 1 [get_debug_ports u_ila_1/probe22]
-connect_debug_port u_ila_1/probe22 [get_nets [list soc/cpu_master_b_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe23]
-set_property port_width 1 [get_debug_ports u_ila_1/probe23]
-connect_debug_port u_ila_1/probe23 [get_nets [list soc/cpu_master_r_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe24]
-set_property port_width 1 [get_debug_ports u_ila_1/probe24]
-connect_debug_port u_ila_1/probe24 [get_nets [list soc/cpu_master_r_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe25]
-set_property port_width 1 [get_debug_ports u_ila_1/probe25]
-connect_debug_port u_ila_1/probe25 [get_nets [list soc/cpu_master_w_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe26]
-set_property port_width 1 [get_debug_ports u_ila_1/probe26]
-connect_debug_port u_ila_1/probe26 [get_nets [list soc/cpu_master_w_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe27]
-set_property port_width 1 [get_debug_ports u_ila_1/probe27]
-connect_debug_port u_ila_1/probe27 [get_nets [list soc/vga/slave_ar_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe28]
-set_property port_width 1 [get_debug_ports u_ila_1/probe28]
-connect_debug_port u_ila_1/probe28 [get_nets [list soc/vga/slave_ar_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe29]
-set_property port_width 1 [get_debug_ports u_ila_1/probe29]
-connect_debug_port u_ila_1/probe29 [get_nets [list soc/vga/slave_aw_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe30]
-set_property port_width 1 [get_debug_ports u_ila_1/probe30]
-connect_debug_port u_ila_1/probe30 [get_nets [list soc/vga/slave_aw_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe31]
-set_property port_width 1 [get_debug_ports u_ila_1/probe31]
-connect_debug_port u_ila_1/probe31 [get_nets [list soc/vga/slave_b_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe32]
-set_property port_width 1 [get_debug_ports u_ila_1/probe32]
-connect_debug_port u_ila_1/probe32 [get_nets [list soc/vga/slave_b_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe33]
-set_property port_width 1 [get_debug_ports u_ila_1/probe33]
-connect_debug_port u_ila_1/probe33 [get_nets [list soc/vga/slave_r_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe34]
-set_property port_width 1 [get_debug_ports u_ila_1/probe34]
-connect_debug_port u_ila_1/probe34 [get_nets [list soc/vga/slave_r_valid]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe35]
-set_property port_width 1 [get_debug_ports u_ila_1/probe35]
-connect_debug_port u_ila_1/probe35 [get_nets [list soc/vga/slave_w_ready]]
-create_debug_port u_ila_1 probe
-set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_1/probe36]
-set_property port_width 1 [get_debug_ports u_ila_1/probe36]
-connect_debug_port u_ila_1/probe36 [get_nets [list soc/vga/slave_w_valid]]
+set_property port_width 4 [get_debug_ports u_ila_0/probe6]
+connect_debug_port u_ila_0/probe6 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_cacheType][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_cacheType][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_cacheType][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_cacheType][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe7]
+set_property port_width 4 [get_debug_ports u_ila_0/probe7]
+connect_debug_port u_ila_0/probe7 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_id][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_id][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_id][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_id][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe8]
+set_property port_width 4 [get_debug_ports u_ila_0/probe8]
+connect_debug_port u_ila_0/probe8 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_len][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_len][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_len][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_len][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe9]
+set_property port_width 3 [get_debug_ports u_ila_0/probe9]
+connect_debug_port u_ila_0/probe9 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_size][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_size][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_size][2]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe10]
+set_property port_width 2 [get_debug_ports u_ila_0/probe10]
+connect_debug_port u_ila_0/probe10 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_lockType][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_lockType][1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe11]
+set_property port_width 3 [get_debug_ports u_ila_0/probe11]
+connect_debug_port u_ila_0/probe11 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_protection][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_protection][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_protection][2]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe12]
+set_property port_width 32 [get_debug_ports u_ila_0/probe12]
+connect_debug_port u_ila_0/probe12 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][3]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][4]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][5]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][6]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][7]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][8]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][9]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][10]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][11]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][12]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][13]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][14]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][15]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][16]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][17]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][18]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][19]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][20]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][21]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][22]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][23]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][24]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][25]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][26]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][27]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][28]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][29]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][30]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_addr][31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe13]
+set_property port_width 2 [get_debug_ports u_ila_0/probe13]
+connect_debug_port u_ila_0/probe13 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_burstType][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_burstType][1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe14]
+set_property port_width 4 [get_debug_ports u_ila_0/probe14]
+connect_debug_port u_ila_0/probe14 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_cacheType][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_cacheType][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_cacheType][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_cacheType][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe15]
+set_property port_width 4 [get_debug_ports u_ila_0/probe15]
+connect_debug_port u_ila_0/probe15 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_id][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_id][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_id][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_id][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe16]
+set_property port_width 4 [get_debug_ports u_ila_0/probe16]
+connect_debug_port u_ila_0/probe16 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_len][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_len][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_len][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_len][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe17]
+set_property port_width 2 [get_debug_ports u_ila_0/probe17]
+connect_debug_port u_ila_0/probe17 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_lockType][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_lockType][1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe18]
+set_property port_width 3 [get_debug_ports u_ila_0/probe18]
+connect_debug_port u_ila_0/probe18 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_protection][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_protection][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_protection][2]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe19]
+set_property port_width 3 [get_debug_ports u_ila_0/probe19]
+connect_debug_port u_ila_0/probe19 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_size][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_size][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_size][2]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe20]
+set_property port_width 32 [get_debug_ports u_ila_0/probe20]
+connect_debug_port u_ila_0/probe20 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][3]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][4]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][5]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][6]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][7]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][8]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][9]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][10]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][11]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][12]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][13]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][14]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][15]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][16]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][17]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][18]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][19]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][20]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][21]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][22]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][23]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][24]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][25]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][26]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][27]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][28]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][29]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][30]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_data][31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe21]
+set_property port_width 4 [get_debug_ports u_ila_0/probe21]
+connect_debug_port u_ila_0/probe21 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_id][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_id][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_id][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_id][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe22]
+set_property port_width 4 [get_debug_ports u_ila_0/probe22]
+connect_debug_port u_ila_0/probe22 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_strobe][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_strobe][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_strobe][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_strobe][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe23]
+set_property port_width 4 [get_debug_ports u_ila_0/probe23]
+connect_debug_port u_ila_0/probe23 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[BW_id][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[BW_id][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[BW_id][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[BW_id][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe24]
+set_property port_width 2 [get_debug_ports u_ila_0/probe24]
+connect_debug_port u_ila_0/probe24 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[BW_response][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[BW_response][1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe25]
+set_property port_width 32 [get_debug_ports u_ila_0/probe25]
+connect_debug_port u_ila_0/probe25 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][3]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][4]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][5]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][6]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][7]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][8]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][9]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][10]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][11]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][12]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][13]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][14]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][15]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][16]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][17]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][18]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][19]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][20]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][21]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][22]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][23]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][24]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][25]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][26]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][27]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][28]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][29]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][30]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_data][31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe26]
+set_property port_width 4 [get_debug_ports u_ila_0/probe26]
+connect_debug_port u_ila_0/probe26 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_id][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_id][1]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_id][2]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_id][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe27]
+set_property port_width 2 [get_debug_ports u_ila_0/probe27]
+connect_debug_port u_ila_0/probe27 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_response][0]} {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_response][1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe28]
+set_property port_width 32 [get_debug_ports u_ila_0/probe28]
+connect_debug_port u_ila_0/probe28 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Random[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe29]
+set_property port_width 32 [get_debug_ports u_ila_0/probe29]
+connect_debug_port u_ila_0/probe29 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Status[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe30]
+set_property port_width 32 [get_debug_ports u_ila_0/probe30]
+connect_debug_port u_ila_0/probe30 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/reg_Wired[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe31]
+set_property port_width 8 [get_debug_ports u_ila_0/probe31]
+connect_debug_port u_ila_0/probe31 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/Instance_Co_Processor0/sel_Interupt[7]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe32]
+set_property port_width 4 [get_debug_ports u_ila_0/probe32]
+connect_debug_port u_ila_0/probe32 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[ctrl][0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[ctrl][1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[ctrl][2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[ctrl][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe33]
+set_property port_width 2 [get_debug_ports u_ila_0/probe33]
+connect_debug_port u_ila_0/probe33 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[size][0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[size][1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe34]
+set_property port_width 32 [get_debug_ports u_ila_0/probe34]
+connect_debug_port u_ila_0/probe34 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][1]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][2]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][3]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][4]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][5]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][6]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][7]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][8]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][9]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][10]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][11]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][12]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][13]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][14]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][15]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][16]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][17]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][18]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][19]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][20]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][21]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][22]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][23]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][24]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][25]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][26]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][27]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][28]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][29]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][30]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[vaddr][31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe35]
+set_property port_width 2 [get_debug_ports u_ila_0/probe35]
+connect_debug_port u_ila_0/probe35 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/inst_data_ready[0]} {soc/cpu/cpu_mid/cpu_core/instance_back_end/inst_data_ready[1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe36]
+set_property port_width 4 [get_debug_ports u_ila_0/probe36]
+connect_debug_port u_ila_0/probe36 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[ctrl][0]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[ctrl][1]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[ctrl][2]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[ctrl][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe37]
+set_property port_width 2 [get_debug_ports u_ila_0/probe37]
+connect_debug_port u_ila_0/probe37 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[size][0]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[size][1]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe38]
+set_property port_width 32 [get_debug_ports u_ila_0/probe38]
+connect_debug_port u_ila_0/probe38 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][0]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][1]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][2]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][3]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][4]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][5]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][6]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][7]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][8]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][9]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][10]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][11]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][12]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][13]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][14]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][15]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][16]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][17]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][18]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][19]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][20]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][21]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][22]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][23]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][24]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][25]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][26]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][27]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][28]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][29]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][30]} {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[vaddr][31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe39]
+set_property port_width 5 [get_debug_ports u_ila_0/probe39]
+connect_debug_port u_ila_0/probe39 [get_nets [list {soc/cpu/cpu_mid/debug_info[0][w_addr][0]} {soc/cpu/cpu_mid/debug_info[0][w_addr][1]} {soc/cpu/cpu_mid/debug_info[0][w_addr][2]} {soc/cpu/cpu_mid/debug_info[0][w_addr][3]} {soc/cpu/cpu_mid/debug_info[0][w_addr][4]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe40]
+set_property port_width 4 [get_debug_ports u_ila_0/probe40]
+connect_debug_port u_ila_0/probe40 [get_nets [list {soc/cpu/cpu_mid/debug_info[0][w_enable][0]} {soc/cpu/cpu_mid/debug_info[0][w_enable][1]} {soc/cpu/cpu_mid/debug_info[0][w_enable][2]} {soc/cpu/cpu_mid/debug_info[0][w_enable][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe41]
+set_property port_width 30 [get_debug_ports u_ila_0/probe41]
+connect_debug_port u_ila_0/probe41 [get_nets [list {soc/cpu/cpu_mid/debug_info[1][pc][2]} {soc/cpu/cpu_mid/debug_info[1][pc][3]} {soc/cpu/cpu_mid/debug_info[1][pc][4]} {soc/cpu/cpu_mid/debug_info[1][pc][5]} {soc/cpu/cpu_mid/debug_info[1][pc][6]} {soc/cpu/cpu_mid/debug_info[1][pc][7]} {soc/cpu/cpu_mid/debug_info[1][pc][8]} {soc/cpu/cpu_mid/debug_info[1][pc][9]} {soc/cpu/cpu_mid/debug_info[1][pc][10]} {soc/cpu/cpu_mid/debug_info[1][pc][11]} {soc/cpu/cpu_mid/debug_info[1][pc][12]} {soc/cpu/cpu_mid/debug_info[1][pc][13]} {soc/cpu/cpu_mid/debug_info[1][pc][14]} {soc/cpu/cpu_mid/debug_info[1][pc][15]} {soc/cpu/cpu_mid/debug_info[1][pc][16]} {soc/cpu/cpu_mid/debug_info[1][pc][17]} {soc/cpu/cpu_mid/debug_info[1][pc][18]} {soc/cpu/cpu_mid/debug_info[1][pc][19]} {soc/cpu/cpu_mid/debug_info[1][pc][20]} {soc/cpu/cpu_mid/debug_info[1][pc][21]} {soc/cpu/cpu_mid/debug_info[1][pc][22]} {soc/cpu/cpu_mid/debug_info[1][pc][23]} {soc/cpu/cpu_mid/debug_info[1][pc][24]} {soc/cpu/cpu_mid/debug_info[1][pc][25]} {soc/cpu/cpu_mid/debug_info[1][pc][26]} {soc/cpu/cpu_mid/debug_info[1][pc][27]} {soc/cpu/cpu_mid/debug_info[1][pc][28]} {soc/cpu/cpu_mid/debug_info[1][pc][29]} {soc/cpu/cpu_mid/debug_info[1][pc][30]} {soc/cpu/cpu_mid/debug_info[1][pc][31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe42]
+set_property port_width 5 [get_debug_ports u_ila_0/probe42]
+connect_debug_port u_ila_0/probe42 [get_nets [list {soc/cpu/cpu_mid/debug_info[1][w_addr][0]} {soc/cpu/cpu_mid/debug_info[1][w_addr][1]} {soc/cpu/cpu_mid/debug_info[1][w_addr][2]} {soc/cpu/cpu_mid/debug_info[1][w_addr][3]} {soc/cpu/cpu_mid/debug_info[1][w_addr][4]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe43]
+set_property port_width 32 [get_debug_ports u_ila_0/probe43]
+connect_debug_port u_ila_0/probe43 [get_nets [list {soc/cpu/cpu_mid/debug_info[1][w_data][0]} {soc/cpu/cpu_mid/debug_info[1][w_data][1]} {soc/cpu/cpu_mid/debug_info[1][w_data][2]} {soc/cpu/cpu_mid/debug_info[1][w_data][3]} {soc/cpu/cpu_mid/debug_info[1][w_data][4]} {soc/cpu/cpu_mid/debug_info[1][w_data][5]} {soc/cpu/cpu_mid/debug_info[1][w_data][6]} {soc/cpu/cpu_mid/debug_info[1][w_data][7]} {soc/cpu/cpu_mid/debug_info[1][w_data][8]} {soc/cpu/cpu_mid/debug_info[1][w_data][9]} {soc/cpu/cpu_mid/debug_info[1][w_data][10]} {soc/cpu/cpu_mid/debug_info[1][w_data][11]} {soc/cpu/cpu_mid/debug_info[1][w_data][12]} {soc/cpu/cpu_mid/debug_info[1][w_data][13]} {soc/cpu/cpu_mid/debug_info[1][w_data][14]} {soc/cpu/cpu_mid/debug_info[1][w_data][15]} {soc/cpu/cpu_mid/debug_info[1][w_data][16]} {soc/cpu/cpu_mid/debug_info[1][w_data][17]} {soc/cpu/cpu_mid/debug_info[1][w_data][18]} {soc/cpu/cpu_mid/debug_info[1][w_data][19]} {soc/cpu/cpu_mid/debug_info[1][w_data][20]} {soc/cpu/cpu_mid/debug_info[1][w_data][21]} {soc/cpu/cpu_mid/debug_info[1][w_data][22]} {soc/cpu/cpu_mid/debug_info[1][w_data][23]} {soc/cpu/cpu_mid/debug_info[1][w_data][24]} {soc/cpu/cpu_mid/debug_info[1][w_data][25]} {soc/cpu/cpu_mid/debug_info[1][w_data][26]} {soc/cpu/cpu_mid/debug_info[1][w_data][27]} {soc/cpu/cpu_mid/debug_info[1][w_data][28]} {soc/cpu/cpu_mid/debug_info[1][w_data][29]} {soc/cpu/cpu_mid/debug_info[1][w_data][30]} {soc/cpu/cpu_mid/debug_info[1][w_data][31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe44]
+set_property port_width 4 [get_debug_ports u_ila_0/probe44]
+connect_debug_port u_ila_0/probe44 [get_nets [list {soc/cpu/cpu_mid/debug_info[1][w_enable][0]} {soc/cpu/cpu_mid/debug_info[1][w_enable][1]} {soc/cpu/cpu_mid/debug_info[1][w_enable][2]} {soc/cpu/cpu_mid/debug_info[1][w_enable][3]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe45]
+set_property port_width 32 [get_debug_ports u_ila_0/probe45]
+connect_debug_port u_ila_0/probe45 [get_nets [list {soc/cpu/cpu_mid/debug_wb_pc[0]} {soc/cpu/cpu_mid/debug_wb_pc[1]} {soc/cpu/cpu_mid/debug_wb_pc[2]} {soc/cpu/cpu_mid/debug_wb_pc[3]} {soc/cpu/cpu_mid/debug_wb_pc[4]} {soc/cpu/cpu_mid/debug_wb_pc[5]} {soc/cpu/cpu_mid/debug_wb_pc[6]} {soc/cpu/cpu_mid/debug_wb_pc[7]} {soc/cpu/cpu_mid/debug_wb_pc[8]} {soc/cpu/cpu_mid/debug_wb_pc[9]} {soc/cpu/cpu_mid/debug_wb_pc[10]} {soc/cpu/cpu_mid/debug_wb_pc[11]} {soc/cpu/cpu_mid/debug_wb_pc[12]} {soc/cpu/cpu_mid/debug_wb_pc[13]} {soc/cpu/cpu_mid/debug_wb_pc[14]} {soc/cpu/cpu_mid/debug_wb_pc[15]} {soc/cpu/cpu_mid/debug_wb_pc[16]} {soc/cpu/cpu_mid/debug_wb_pc[17]} {soc/cpu/cpu_mid/debug_wb_pc[18]} {soc/cpu/cpu_mid/debug_wb_pc[19]} {soc/cpu/cpu_mid/debug_wb_pc[20]} {soc/cpu/cpu_mid/debug_wb_pc[21]} {soc/cpu/cpu_mid/debug_wb_pc[22]} {soc/cpu/cpu_mid/debug_wb_pc[23]} {soc/cpu/cpu_mid/debug_wb_pc[24]} {soc/cpu/cpu_mid/debug_wb_pc[25]} {soc/cpu/cpu_mid/debug_wb_pc[26]} {soc/cpu/cpu_mid/debug_wb_pc[27]} {soc/cpu/cpu_mid/debug_wb_pc[28]} {soc/cpu/cpu_mid/debug_wb_pc[29]} {soc/cpu/cpu_mid/debug_wb_pc[30]} {soc/cpu/cpu_mid/debug_wb_pc[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe46]
+set_property port_width 32 [get_debug_ports u_ila_0/probe46]
+connect_debug_port u_ila_0/probe46 [get_nets [list {soc/cpu/cpu_mid/debug_wb_rf_wdata[0]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[1]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[2]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[3]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[4]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[5]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[6]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[7]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[8]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[9]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[10]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[11]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[12]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[13]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[14]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[15]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[16]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[17]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[18]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[19]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[20]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[21]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[22]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[23]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[24]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[25]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[26]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[27]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[28]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[29]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[30]} {soc/cpu/cpu_mid/debug_wb_rf_wdata[31]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe47]
+set_property port_width 1 [get_debug_ports u_ila_0/probe47]
+connect_debug_port u_ila_0/probe47 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/bus_busy_r]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe48]
+set_property port_width 1 [get_debug_ports u_ila_0/probe48]
+connect_debug_port u_ila_0/probe48 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AR_valid]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe49]
+set_property port_width 1 [get_debug_ports u_ila_0/probe49]
+connect_debug_port u_ila_0/probe49 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[AW_valid]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe50]
+set_property port_width 1 [get_debug_ports u_ila_0/probe50]
+connect_debug_port u_ila_0/probe50 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[BW_ready]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe51]
+set_property port_width 1 [get_debug_ports u_ila_0/probe51]
+connect_debug_port u_ila_0/probe51 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DR_ready]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe52]
+set_property port_width 1 [get_debug_ports u_ila_0/probe52]
+connect_debug_port u_ila_0/probe52 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_last]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe53]
+set_property port_width 1 [get_debug_ports u_ila_0/probe53]
+connect_debug_port u_ila_0/probe53 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_req[DW_valid]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe54]
+set_property port_width 1 [get_debug_ports u_ila_0/probe54]
+connect_debug_port u_ila_0/probe54 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[AR_ready]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe55]
+set_property port_width 1 [get_debug_ports u_ila_0/probe55]
+connect_debug_port u_ila_0/probe55 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[AW_ready]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe56]
+set_property port_width 1 [get_debug_ports u_ila_0/probe56]
+connect_debug_port u_ila_0/probe56 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[BW_valid]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe57]
+set_property port_width 1 [get_debug_ports u_ila_0/probe57]
+connect_debug_port u_ila_0/probe57 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_last]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe58]
+set_property port_width 1 [get_debug_ports u_ila_0/probe58]
+connect_debug_port u_ila_0/probe58 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DR_valid]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe59]
+set_property port_width 1 [get_debug_ports u_ila_0/probe59]
+connect_debug_port u_ila_0/probe59 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_axi_crossbar/comp_resp[DW_ready]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe60]
+set_property port_width 1 [get_debug_ports u_ila_0/probe60]
+connect_debug_port u_ila_0/probe60 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_back_end/dcache_stall]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe61]
+set_property port_width 1 [get_debug_ports u_ila_0/probe61]
+connect_debug_port u_ila_0/probe61 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[passthrough]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe62]
+set_property port_width 1 [get_debug_ports u_ila_0/probe62]
+connect_debug_port u_ila_0/probe62 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[passthrough]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe63]
+set_property port_width 1 [get_debug_ports u_ila_0/probe63]
+connect_debug_port u_ila_0/probe63 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_back_end/InstanceDCache/delay_2_req[valid]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe64]
+set_property port_width 1 [get_debug_ports u_ila_0/probe64]
+connect_debug_port u_ila_0/probe64 [get_nets [list {soc/cpu/cpu_mid/cpu_core/instance_front_end/inst_cache/delay_2_req[valid]}]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe65]
+set_property port_width 1 [get_debug_ports u_ila_0/probe65]
+connect_debug_port u_ila_0/probe65 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/fifo_full]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe66]
+set_property port_width 1 [get_debug_ports u_ila_0/probe66]
+connect_debug_port u_ila_0/probe66 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/fifo_jump]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe67]
+set_property port_width 1 [get_debug_ports u_ila_0/probe67]
+connect_debug_port u_ila_0/probe67 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_back_end/general_stall]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe68]
+set_property port_width 1 [get_debug_ports u_ila_0/probe68]
+connect_debug_port u_ila_0/probe68 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/i_cache_ctrl_recive]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe69]
+set_property port_width 1 [get_debug_ports u_ila_0/probe69]
+connect_debug_port u_ila_0/probe69 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/i_cache_ctrl_valid]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe70]
+set_property port_width 1 [get_debug_ports u_ila_0/probe70]
+connect_debug_port u_ila_0/probe70 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_back_end/mdu_stall]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe71]
+set_property port_width 1 [get_debug_ports u_ila_0/probe71]
+connect_debug_port u_ila_0/probe71 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/npc_jump]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe72]
+set_property port_width 1 [get_debug_ports u_ila_0/probe72]
+connect_debug_port u_ila_0/probe72 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/npc_stall]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe73]
+set_property port_width 1 [get_debug_ports u_ila_0/probe73]
+connect_debug_port u_ila_0/probe73 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_back_end/slot_1_cant_issue]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe74]
+set_property port_width 1 [get_debug_ports u_ila_0/probe74]
+connect_debug_port u_ila_0/probe74 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_back_end/slot_2_cant_issue]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe75]
+set_property port_width 1 [get_debug_ports u_ila_0/probe75]
+connect_debug_port u_ila_0/probe75 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/stall_frontend]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe76]
+set_property port_width 1 [get_debug_ports u_ila_0/probe76]
+connect_debug_port u_ila_0/probe76 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_front_end/tlb_stall]]
+create_debug_port u_ila_0 probe
+set_property PROBE_TYPE DATA_AND_TRIGGER [get_debug_ports u_ila_0/probe77]
+set_property port_width 1 [get_debug_ports u_ila_0/probe77]
+connect_debug_port u_ila_0/probe77 [get_nets [list soc/cpu/cpu_mid/cpu_core/instance_back_end/tlb_stall]]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
-connect_debug_port dbg_hub/clk [get_nets soc_clk]
+connect_debug_port dbg_hub/clk [get_nets cpu_clk]

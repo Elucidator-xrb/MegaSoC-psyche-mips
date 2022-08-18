@@ -20,7 +20,9 @@ module vga_wrapper (
     (*mark_debug = "true"*) wire        slave_ar_ready = slv.ar_ready ;
     (*mark_debug = "true"*) wire [31:0] slave_r_data   = slv.r_data   ;
     (*mark_debug = "true"*) wire [1 :0] slave_r_resp   = slv.r_resp   ;
-    (*mark_debug = "true"*) wire        slave_r_valid  = slv.r_valid  ;
+    (*mark_debug = "true"*) wire        slave_r_valid  = slv.r_valid ;
+    assign slv.r_last = slave_r_valid;
+    (*mark_debug = "true"*) wire        slave_r_last  = slv.r_last;
     (*mark_debug = "true"*) wire        slave_r_ready  = slv.r_ready  ;
     (*mark_debug = "true"*) wire [3 :0] slave_aw_addr  = slv.aw_addr  ;
     (*mark_debug = "true"*) wire        slave_aw_valid = slv.aw_valid ;

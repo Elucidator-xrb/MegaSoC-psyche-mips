@@ -3,8 +3,9 @@ module soc_top #(
     parameter C_ASIC_SRAM = 1
 ) (
     input soc_clk,
+    input mig_clk,
     input cpu_clk,
-    input aresetn,
+    input mig_aresetn,
     
     output [6:0]  mem_axi_awid,
     output [31:0] mem_axi_awaddr,
@@ -115,6 +116,8 @@ module soc_top #(
     output i2cm_sda_t
 );
 
+wire soc_aresetn;
+
 `define AXI_LINE(name) AXI_BUS #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32), .AXI_ID_WIDTH(4)) name()
 `define AXI_LITE_LINE(name) AXI_LITE #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32)) name()
 `define AXI_LINE_W(name, idw) AXI_BUS #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32), .AXI_ID_WIDTH(idw)) name()
@@ -135,9 +138,31 @@ module soc_top #(
 `AXI_LINE(fbw_s);   // framebuffer writer
 
 `AXI_LINE_W(mig_s, 7);
+`AXI_LINE_W(mig_soc, 7);
 `AXI_LINE(apb_s);
 `AXI_LINE(cfg_s);
 `AXI_LINE(err_s);
+// 这里进行一个时钟域转换，从mig uiclk -> SoC clk
+stolen_cdc_sync_rst soc_rstgen(
+    .dest_clk(soc_clk),
+    .dest_rst(soc_aresetn),
+    .src_rst(mig_aresetn)
+);
+axi_cdc_intf #(
+    .AXI_ID_WIDTH(6),
+    .AXI_ADDR_WIDTH(32),
+    .AXI_DATA_WIDTH(32),
+    .LOG_DEPTH(2)
+) cpu_cdc (
+    .src_clk_i(soc_clk),
+    .src_rst_ni(soc_aresetn),
+    .src(mig_soc),
+    
+    .dst_clk_i(mig_clk),
+    .dst_rst_ni(mig_aresetn),
+    .dst(mig_s)
+); 
+
 error_slave_wrapper err_slave_err(soc_clk, aresetn, err_s);
 
 wire spi_interrupt;
@@ -156,7 +181,7 @@ cpu_wrapper #(
 ) cpu (
     .cpu_clk(cpu_clk),
     .m0_clk(soc_clk),
-    .m0_aresetn(aresetn),
+    .m0_aresetn(soc_aresetn),
     .interrupt({intr_ctrl, cpu_interrupt}),
     .m0(cpu_m),
 
@@ -217,7 +242,7 @@ my_axi_demux_intf #(
     .FALL_THROUGH(1)
 ) cpu_demux (
     .clk_i(soc_clk),
-    .rst_ni(aresetn),
+    .rst_ni(soc_aresetn),
     .test_i(1'b0),
     .slv_aw_select_i(periph_addr_sel(cpu_m.aw_addr)),
     .slv_ar_select_i(periph_addr_sel(cpu_m.ar_addr)),
@@ -245,14 +270,14 @@ my_axi_mux_intf #(
     .FALL_THROUGH(1)
 ) mem_mux (
     .clk_i(soc_clk),
-    .rst_ni(aresetn),
+    .rst_ni(soc_aresetn),
     .test_i(1'b0),
     .slv0(sdc_dma_m),
     .slv1(mem_m),
     .slv2(vga_dma_m),
     .slv3(fbr_dma_m),
     .slv4(fbw_dma_m),
-    .mst(mig_s)
+    .mst(mig_soc)
 );
 
 axi_intc_wrapper #(
@@ -260,7 +285,7 @@ axi_intc_wrapper #(
 ) intc (
     .aslv(intc_s),
     .aclk(soc_clk),
-    .aresetn(aresetn),
+    .aresetn(soc_aresetn),
     .irq_i(interrupts),
     .irq_o(cpu_interrupt)
 );
@@ -270,7 +295,7 @@ ethernet_wrapper #(
     .C_ASIC_SRAM(C_ASIC_SRAM)
 ) ethernet (
     .aclk        (soc_clk  ),
-    .aresetn     (aresetn  ),      
+    .aresetn     (soc_aresetn  ),      
     .slv         (eth_s    ),
 
     .interrupt_0 (eth_interrupt),
@@ -296,7 +321,7 @@ ethernet_wrapper #(
 
 sdc_wrapper sdc(
     .aclk(soc_clk),
-    .aresetn(aresetn),
+    .aresetn(soc_aresetn),
     
     .slv(sdc_s),
     .dma_mst(sdc_dma_m),
@@ -314,7 +339,7 @@ sdc_wrapper sdc(
 
 vga_wrapper vga(
     .aclk(soc_clk),
-    .aresetn(aresetn),
+    .aresetn(soc_aresetn),
 
     .slv(vga_s),
     .dma_mst(vga_dma_m),
@@ -329,7 +354,7 @@ vga_wrapper vga(
 
 framebuffer_wrapper fb(
     .aclk(soc_clk),
-    .aresetn(aresetn),
+    .aresetn(soc_aresetn),
     .ctl_reg1(32'h8000_0000),
 
     .slv_read(fbr_s),
@@ -341,7 +366,7 @@ framebuffer_wrapper fb(
 //confreg
 confreg CONFREG(
     .aclk           (soc_clk            ),       
-    .aresetn        (aresetn            ),       
+    .aresetn        (soc_aresetn            ),       
     .s_awid         (cfg_s.aw_id        ),
     .s_awaddr       (cfg_s.aw_addr      ),
     .s_awlen        (cfg_s.aw_len       ),
@@ -387,7 +412,7 @@ confreg CONFREG(
 
 spi_flash_ctrl SPI (                                         
     .aclk           (soc_clk            ),       
-    .aresetn        (aresetn            ),       
+    .aresetn        (soc_aresetn            ),       
     .spi_addr       (16'h1fe8           ),
     .fast_startup   (1'b0               ),
     .s_awid         (spi_s.aw_id        ),
@@ -444,7 +469,7 @@ spi_flash_ctrl SPI (
 axi2apb_misc #(.C_ASIC_SRAM(C_ASIC_SRAM)) APB_DEV 
 (
 .clk                (soc_clk               ),
-.rst_n              (aresetn            ),
+.rst_n              (soc_aresetn            ),
 
 .axi_s_awid         (apb_s.aw_id        ),
 .axi_s_awaddr       (apb_s.aw_addr      ),
