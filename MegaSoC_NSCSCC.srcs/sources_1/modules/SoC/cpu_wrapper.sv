@@ -196,7 +196,7 @@ wire [31:0] debug_wb_rf_wdata;
 // cpu
 mycpu_mega_top  cpu_mid (
   .aclk         (cpu_clk),
-  .ext_int      ({4'b0, int_cpu}),  //232 only 5bit
+  .ext_int      ({6'b0, int_cpu}),  //232 only 5bit
   .aresetn      (cpu_aresetn    ),
   .global_reset (cpu_global_reset),
  

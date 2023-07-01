@@ -189,6 +189,8 @@ cpu_wrapper #(
     .debug_output_data(debug_output_data)
 );
 
+    (*mark_debug = "true"*) wire [31:0] cpu_master_ar_addr  = cpu_m.ar_addr ;
+    (*mark_debug = "true"*) wire [1:0] cpu_master_ar_burst = cpu_m.ar_burst ;
     (*mark_debug = "true"*) wire cpu_master_ar_valid = cpu_m.ar_valid ;
     (*mark_debug = "true"*) wire cpu_master_ar_ready = cpu_m.ar_ready ;
     (*mark_debug = "true"*) wire cpu_master_r_valid  = cpu_m.r_valid  ;
@@ -209,7 +211,7 @@ function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
     automatic logic [3:0] select;
     if (addr[31:27] == 5'b0) // MIG
         select = 1;
-    else if (addr[31:20]==12'h1fc || addr[31:16]==16'h1fe8) // SPI
+    else if (addr[31:20]==12'h1c0 || addr[31:16]==16'h1fe8) // SPI
         select = 5;
     else if (addr[31:16]==16'h1fe4 || addr[31:16]==16'h1fe7 || addr[31:16] == 16'h1fe5) // APB
         select = 3; 
@@ -221,11 +223,11 @@ function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
         select = 6;
     else if (addr[31:16]==16'h1fe1) // SD Controller
         select = 7;
-    else if (addr[31:16]==16'h1c01) // VGA Controller
+    else if (addr[31:16]==16'h1c11) // VGA Controller
         select = 8;
-    else if (addr[31:16]==16'h1c06) // Framebuffer Reader
+    else if (addr[31:16]==16'h1c16) // Framebuffer Reader
         select = 9;
-    else if (addr[31:16]==16'h1c07) // Framebuffer Writer
+    else if (addr[31:16]==16'h1c17) // Framebuffer Writer
         select = 10;
     else // ERROR
         select = 0;

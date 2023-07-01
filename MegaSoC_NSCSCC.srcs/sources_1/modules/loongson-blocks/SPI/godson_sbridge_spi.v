@@ -190,7 +190,7 @@ module spi_flash_ctrl(
    wire             io_hit =(buf_addr[31:4] == {spi_addr, 12'b0}) &
                             (buf_len  == 4'b0);
 
-   wire [63:0]      buf_addr_t = (buf_addr[31:20]==12'h1fc)? 
+   wire [63:0]      buf_addr_t = (buf_addr[31:20]==12'h1c0)? 
                                     {12'h0, buf_addr[19:0]}: 
                                     { 8'h0, buf_addr[23:0]}; 
 
