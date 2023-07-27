@@ -1,7 +1,7 @@
 `include "memory_management/def.svh"
 `include "global.svh"
 
-module mycpu_top #(
+module tyhcpu_top #(
     parameter IMPLEMENT_LIKELY = 0,
     parameter C_ASIC_SRAM = 0
 ) (

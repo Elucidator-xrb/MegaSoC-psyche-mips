@@ -142,11 +142,13 @@ wire soc_aresetn;
 `AXI_LINE(apb_s);
 `AXI_LINE(cfg_s);
 `AXI_LINE(err_s);
+
 // 这里进行一个时钟域转换，从mig uiclk -> SoC clk
 stolen_cdc_sync_rst soc_rstgen(
+    .src_rst(mig_aresetn),
     .dest_clk(soc_clk),
-    .dest_rst(soc_aresetn),
-    .src_rst(mig_aresetn)
+    // output
+    .dest_rst(soc_aresetn)
 );
 axi_cdc_intf #(
     .AXI_ID_WIDTH(6),
@@ -163,7 +165,7 @@ axi_cdc_intf #(
     .dst(mig_s)
 ); 
 
-error_slave_wrapper err_slave_err(soc_clk, aresetn, err_s);
+error_slave_wrapper err_slave_err(soc_clk, soc_aresetn, err_s);
 
 wire spi_interrupt;
 wire eth_interrupt;
@@ -175,14 +177,17 @@ wire cdbus_interrupt;
 wire i2c_interrupt;
 // Ethernet should be at lowest bit because the configuration in intc
 // (interrupt of emaclite is a pulse interrupt, not level) 
-wire [7:0] interrupts = {i2c_interrupt, cdbus_interrupt, usb_interrupt, sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt, eth_interrupt};
+// wire [7:0] interrupts = {i2c_interrupt, cdbus_interrupt, usb_interrupt, sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt, eth_interrupt};
+
+wire [3:0] interrupts = {sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt};
+
 cpu_wrapper #(
     .C_ASIC_SRAM(C_ASIC_SRAM)
 ) cpu (
     .cpu_clk(cpu_clk),
     .m0_clk(soc_clk),
     .m0_aresetn(soc_aresetn),
-    .interrupt({intr_ctrl, cpu_interrupt}),
+    .interrupt(interrupts),
     .m0(cpu_m),
 
     .debug_output_mode(debug_output_mode),
@@ -213,22 +218,22 @@ function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
         select = 1;
     else if (addr[31:20]==12'h1c0 || addr[31:16]==16'h1fe8) // SPI
         select = 5;
-    else if (addr[31:16]==16'h1fe4 || addr[31:16]==16'h1fe7 || addr[31:16] == 16'h1fe5) // APB
+    else if (addr[31:16]==16'h1fe4 /* || addr[31:16]==16'h1fe7 || addr[31:16] == 16'h1fe5 */) // APB
         select = 3; 
     else if (addr[31:16]==16'h1fd0) // conf
         select = 2;
     else if (addr[31:16]==16'h1ff0) // Ethernet
         select = 4;
-    else if (addr[31:16]==16'h1fb0) // Interrupt Controller
-        select = 6;
+    // else if (addr[31:16]==16'h1fb0) // Interrupt Controller
+    //     select = 6;
     else if (addr[31:16]==16'h1fe1) // SD Controller
         select = 7;
     else if (addr[31:16]==16'h1c11) // VGA Controller
         select = 8;
-    else if (addr[31:16]==16'h1c16) // Framebuffer Reader
-        select = 9;
-    else if (addr[31:16]==16'h1c17) // Framebuffer Writer
-        select = 10;
+    // else if (addr[31:16]==16'h1c16) // Framebuffer Reader
+    //     select = 9;
+    // else if (addr[31:16]==16'h1c17) // Framebuffer Writer
+    //     select = 10;
     else // ERROR
         select = 0;
     return select;
@@ -255,11 +260,11 @@ my_axi_demux_intf #(
     .mst3(apb_s),
     .mst4(eth_s),
     .mst5(spi_s),
-    .mst6(intc_s),
+    .mst6(intc_s),  // unused
     .mst7(sdc_s),
     .mst8(vga_s),
-    .mst9(fbr_s),
-    .mst10(fbw_s)
+    .mst9(fbr_s),   // unused
+    .mst10(fbw_s)   // unused
 );
 
 my_axi_mux_intf #(
@@ -277,20 +282,20 @@ my_axi_mux_intf #(
     .slv0(sdc_dma_m),
     .slv1(mem_m),
     .slv2(vga_dma_m),
-    .slv3(fbr_dma_m),
-    .slv4(fbw_dma_m),
+    .slv3(fbr_dma_m),  // unused
+    .slv4(fbw_dma_m),  // unused
     .mst(mig_soc)
 );
 
-axi_intc_wrapper #(
-    .C_NUM_INTR_INPUTS($bits(interrupts))
-) intc (
-    .aslv(intc_s),
-    .aclk(soc_clk),
-    .aresetn(soc_aresetn),
-    .irq_i(interrupts),
-    .irq_o(cpu_interrupt)
-);
+// axi_intc_wrapper #(
+//     .C_NUM_INTR_INPUTS($bits(interrupts))
+// ) intc (
+//     .aslv(intc_s),
+//     .aclk(soc_clk),
+//     .aresetn(soc_aresetn),
+//     .irq_i(interrupts),
+//     .irq_o(cpu_interrupt)
+// );
 
 //eth top
 ethernet_wrapper #(
@@ -354,63 +359,89 @@ vga_wrapper vga(
     .vga_clk(vga_clk)
 );
 
-framebuffer_wrapper fb(
-    .aclk(soc_clk),
-    .aresetn(soc_aresetn),
-    .ctl_reg1(32'h8000_0000),
+// framebuffer_wrapper fb(
+//     .aclk(soc_clk),
+//     .aresetn(soc_aresetn),
+//     .ctl_reg1(32'h8000_0000),
 
-    .slv_read(fbr_s),
-    .slv_write(fbw_s),
-    .dma_mst_read(fbr_dma_m),
-    .dma_mst_write(fbw_dma_m)
-);
+//     .slv_read(fbr_s),
+//     .slv_write(fbw_s),
+//     .dma_mst_read(fbr_dma_m),
+//     .dma_mst_write(fbw_dma_m)
+// );
 
 //confreg
-confreg CONFREG(
-    .aclk           (soc_clk            ),       
-    .aresetn        (soc_aresetn            ),       
-    .s_awid         (cfg_s.aw_id        ),
-    .s_awaddr       (cfg_s.aw_addr      ),
-    .s_awlen        (cfg_s.aw_len       ),
-    .s_awsize       (cfg_s.aw_size      ),
-    .s_awburst      (cfg_s.aw_burst     ),
-    .s_awlock       ('0                 ),
-    .s_awcache      ('0                 ),
-    .s_awprot       ('0                 ),
-    .s_awvalid      (cfg_s.aw_valid     ),
-    .s_awready      (cfg_s.aw_ready     ),
-    .s_wready       (cfg_s.w_ready      ),
-    .s_wdata        (cfg_s.w_data       ),
-    .s_wstrb        (cfg_s.w_strb       ),
-    .s_wlast        (cfg_s.w_last       ),
-    .s_wvalid       (cfg_s.w_valid      ),
-    .s_bid          (cfg_s.b_id         ),
-    .s_bresp        (cfg_s.b_resp       ),
-    .s_bvalid       (cfg_s.b_valid      ),
-    .s_bready       (cfg_s.b_ready      ),
-    .s_arid         (cfg_s.ar_id        ),
-    .s_araddr       (cfg_s.ar_addr      ),
-    .s_arlen        (cfg_s.ar_len       ),
-    .s_arsize       (cfg_s.ar_size      ),
-    .s_arburst      (cfg_s.ar_burst     ),
-    .s_arlock       ('0                 ),
-    .s_arcache      ('0                 ),
-    .s_arprot       ('0                 ),
-    .s_arvalid      (cfg_s.ar_valid     ),
-    .s_arready      (cfg_s.ar_ready     ),
-    .s_rready       (cfg_s.r_ready      ),
-    .s_rid          (cfg_s.r_id         ),
-    .s_rdata        (cfg_s.r_data       ),
-    .s_rresp        (cfg_s.r_resp       ),
-    .s_rlast        (cfg_s.r_last       ),
-    .s_rvalid       (cfg_s.r_valid      ),
+la_confreg_syn  confreg_inst (
+    .aclk(soc_clk),
+    .aresetn(soc_aresetn),
 
-    .dat_cfg_to_ctrl,
-    .dat_ctrl_to_cfg,
-    .gpio_o,
-    .gpio_i,
-    .gpio_t
-);
+    .s_awid(cfg_s.aw_id),
+    .s_awaddr(cfg_s.aw_addr),
+    .s_awlen(cfg_s.aw_len),
+    .s_awsize(cfg_s.aw_size),
+    .s_awburst(cfg_s.aw_burst),
+    .s_awlock('0),
+    .s_awcache('0),
+    .s_awprot('0),
+    .s_awvalid(cfg_s.aw_valid),
+    .s_awready(cfg_s.aw_ready),
+
+    .s_wid('0),
+    .s_wdata(cfg_s.w_data),
+    .s_wstrb(cfg_s.w_strb),
+    .s_wlast(cfg_s.w_last),
+    .s_wvalid(cfg_s.w_valid),
+    .s_wready(cfg_s.w_ready),
+
+    .s_bid(cfg_s.b_id),
+    .s_bresp(cfg_s.b_resp),
+    .s_bvalid(cfg_s.b_valid),
+    .s_bready(cfg_s.b_ready),
+
+    .s_arid(cfg_s.ar_id),
+    .s_araddr(cfg_s.ar_addr),
+    .s_arlen(cfg_s.ar_len),
+    .s_arsize(cfg_s.ar_size),
+    .s_arburst(cfg_s.ar_burst),
+    .s_arlock('0),
+    .s_arcache('0),
+    .s_arprot('0),
+    .s_arvalid(cfg_s.ar_valid),
+    .s_arready(cfg_s.ar_ready),
+
+    .s_rid(cfg_s.r_id),
+    .s_rdata(cfg_s.r_data),
+    .s_rresp(cfg_s.r_resp),
+    .s_rlast(cfg_s.r_last),
+    .s_rvalid(cfg_s.r_valid),
+    .s_rready(cfg_s.r_ready)
+
+    // .order_addr_reg(order_addr_reg),
+    // .finish_read_order(finish_read_order),
+    // .write_dma_end(write_dma_end),
+    // .cr00(cr00),
+    // .cr01(cr01),
+    // .cr02(cr02),
+    // .cr03(cr03),
+    // .cr04(cr04),
+    // .cr05(cr05),
+    // .cr06(cr06),
+    // .cr07(cr07),
+    // .led(led),
+    // .led_rg0(led_rg0),
+    // .led_rg1(led_rg1),
+    // .num_csn(num_csn),
+    // .num_a_g(num_a_g),
+    // .switch(switch),
+    // .btn_key_col(btn_key_col),
+    // .btn_key_row(btn_key_row),
+    // .btn_step(btn_step)
+  );
+
+  assign dat_cfg_to_ctrl = '0;
+  assign gpio_o = '0;
+  assign gpio_t = '0;
+
 
 spi_flash_ctrl SPI (                                         
     .aclk           (soc_clk            ),       
@@ -470,76 +501,75 @@ spi_flash_ctrl SPI (
 
 axi2apb_misc #(.C_ASIC_SRAM(C_ASIC_SRAM)) APB_DEV 
 (
-.clk                (soc_clk               ),
-.rst_n              (soc_aresetn            ),
+    .clk                (soc_clk               ),
+    .rst_n              (soc_aresetn            ),
 
-.axi_s_awid         (apb_s.aw_id        ),
-.axi_s_awaddr       (apb_s.aw_addr      ),
-.axi_s_awlen        (apb_s.aw_len[3:0]  ),
-.axi_s_awsize       (apb_s.aw_size      ),
-.axi_s_awburst      (apb_s.aw_burst     ),
-.axi_s_awlock       ('0                 ),
-.axi_s_awcache      ('0                 ),
-.axi_s_awprot       ('0                 ),
-.axi_s_awvalid      (apb_s.aw_valid     ),
-.axi_s_awready      (apb_s.aw_ready     ),
-.axi_s_wready       (apb_s.w_ready      ),
-.axi_s_wdata        (apb_s.w_data       ),
-.axi_s_wstrb        (apb_s.w_strb       ),
-.axi_s_wlast        (apb_s.w_last       ),
-.axi_s_wvalid       (apb_s.w_valid      ),
-.axi_s_bid          (apb_s.b_id         ),
-.axi_s_bresp        (apb_s.b_resp       ),
-.axi_s_bvalid       (apb_s.b_valid      ),
-.axi_s_bready       (apb_s.b_ready      ),
-.axi_s_arid         (apb_s.ar_id        ),
-.axi_s_araddr       (apb_s.ar_addr      ),
-.axi_s_arlen        (apb_s.ar_len[3:0]  ),
-.axi_s_arsize       (apb_s.ar_size      ),
-.axi_s_arburst      (apb_s.ar_burst     ),
-.axi_s_arlock       ('0                 ),
-.axi_s_arcache      ('0                 ),
-.axi_s_arprot       ('0                 ),
-.axi_s_arvalid      (apb_s.ar_valid     ),
-.axi_s_arready      (apb_s.ar_ready     ),
-.axi_s_rready       (apb_s.r_ready      ),
-.axi_s_rid          (apb_s.r_id         ),
-.axi_s_rdata        (apb_s.r_data       ),
-.axi_s_rresp        (apb_s.r_resp       ),
-.axi_s_rlast        (apb_s.r_last       ),
-.axi_s_rvalid       (apb_s.r_valid      ),
+    .axi_s_awid         (apb_s.aw_id        ),
+    .axi_s_awaddr       (apb_s.aw_addr      ),
+    .axi_s_awlen        (apb_s.aw_len[3:0]  ),
+    .axi_s_awsize       (apb_s.aw_size      ),
+    .axi_s_awburst      (apb_s.aw_burst     ),
+    .axi_s_awlock       ('0                 ),
+    .axi_s_awcache      ('0                 ),
+    .axi_s_awprot       ('0                 ),
+    .axi_s_awvalid      (apb_s.aw_valid     ),
+    .axi_s_awready      (apb_s.aw_ready     ),
+    .axi_s_wready       (apb_s.w_ready      ),
+    .axi_s_wdata        (apb_s.w_data       ),
+    .axi_s_wstrb        (apb_s.w_strb       ),
+    .axi_s_wlast        (apb_s.w_last       ),
+    .axi_s_wvalid       (apb_s.w_valid      ),
+    .axi_s_bid          (apb_s.b_id         ),
+    .axi_s_bresp        (apb_s.b_resp       ),
+    .axi_s_bvalid       (apb_s.b_valid      ),
+    .axi_s_bready       (apb_s.b_ready      ),
+    .axi_s_arid         (apb_s.ar_id        ),
+    .axi_s_araddr       (apb_s.ar_addr      ),
+    .axi_s_arlen        (apb_s.ar_len[3:0]  ),
+    .axi_s_arsize       (apb_s.ar_size      ),
+    .axi_s_arburst      (apb_s.ar_burst     ),
+    .axi_s_arlock       ('0                 ),
+    .axi_s_arcache      ('0                 ),
+    .axi_s_arprot       ('0                 ),
+    .axi_s_arvalid      (apb_s.ar_valid     ),
+    .axi_s_arready      (apb_s.ar_ready     ),
+    .axi_s_rready       (apb_s.r_ready      ),
+    .axi_s_rid          (apb_s.r_id         ),
+    .axi_s_rdata        (apb_s.r_data       ),
+    .axi_s_rresp        (apb_s.r_resp       ),
+    .axi_s_rlast        (apb_s.r_last       ),
+    .axi_s_rvalid       (apb_s.r_valid      ),
 
+    .uart0_txd_i        (uart_txd_i      ),
+    .uart0_txd_o        (uart_txd_o      ),
+    .uart0_txd_oe       (uart_txd_en     ),
+    .uart0_rxd_i        (uart_rxd_i      ),
+    .uart0_rxd_o        (uart_rxd_o      ),
+    .uart0_rxd_oe       (uart_rxd_en     ),
+    .uart0_rts_o        (       ),
+    .uart0_dtr_o        (       ),
+    .uart0_cts_i        (1'b0   ),
+    .uart0_dsr_i        (1'b0   ),
+    .uart0_dcd_i        (1'b0   ),
+    .uart0_ri_i         (1'b0   ),
+    .uart0_int          (uart_interrupt),
 
-.uart0_txd_i        (uart_txd_i      ),
-.uart0_txd_o        (uart_txd_o      ),
-.uart0_txd_oe       (uart_txd_en     ),
-.uart0_rxd_i        (uart_rxd_i      ),
-.uart0_rxd_o        (uart_rxd_o      ),
-.uart0_rxd_oe       (uart_rxd_en     ),
-.uart0_rts_o        (       ),
-.uart0_dtr_o        (       ),
-.uart0_cts_i        (1'b0   ),
-.uart0_dsr_i        (1'b0   ),
-.uart0_dcd_i        (1'b0   ),
-.uart0_ri_i         (1'b0   ),
-.uart0_int          (uart_interrupt),
+    .cdbus_int          (cdbus_interrupt),
+    .cdbus_tx           (CDBUS_tx),
+    .cdbus_tx_t         (CDBUS_tx_t),
+    .cdbus_rx           (CDBUS_rx),
+    .cdbus_tx_en        (CDBUS_tx_en),
+    .cdbus_tx_en_t      (CDBUS_tx_en_t),
 
-.cdbus_int          (cdbus_interrupt),
-.cdbus_tx           (CDBUS_tx),
-.cdbus_tx_t         (CDBUS_tx_t),
-.cdbus_rx           (CDBUS_rx),
-.cdbus_tx_en        (CDBUS_tx_en),
-.cdbus_tx_en_t      (CDBUS_tx_en_t),
+    .i2cm_scl_i,
+    .i2cm_scl_o,
+    .i2cm_scl_t, 
 
-.i2cm_scl_i,
-.i2cm_scl_o,
-.i2cm_scl_t, 
+    .i2cm_sda_i,
+    .i2cm_sda_o,
+    .i2cm_sda_t,
 
-.i2cm_sda_i,
-.i2cm_sda_o,
-.i2cm_sda_t,
-
-.i2c_int(i2c_interrupt)
+    .i2c_int(i2c_interrupt)
 );
 
     assign mem_axi_awid = mig_s.aw_id;

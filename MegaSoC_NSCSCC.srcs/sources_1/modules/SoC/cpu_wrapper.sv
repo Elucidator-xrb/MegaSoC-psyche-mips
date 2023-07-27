@@ -8,7 +8,7 @@ module cpu_wrapper #(
     input m0_clk,
     input m0_aresetn,
     
-    input [1:0] interrupt,
+    input [3:0] interrupt,
     AXI_BUS.Master m0,
 
     input [1:0]  debug_output_mode,
@@ -17,14 +17,14 @@ module cpu_wrapper #(
     output cpu_global_reset
 );
 
-wire [1:0] int_cpu;
+wire [3:0] int_cpu;
 stolen_cdc_sync_rst cpu_rstgen(
     .dest_clk(cpu_clk),
     .dest_rst(cpu_aresetn),
     .src_rst(m0_aresetn)
 );
 
-stolen_cdc_array_single #(2, 0, 2) int_cdc(
+stolen_cdc_array_single #(4, 0, 4) int_cdc(
    .src_clk(1'b1),
    .src_in(interrupt),
    .dest_clk(cpu_clk),
@@ -194,11 +194,11 @@ wire [31:0] debug_wb_instr;
 wire [31:0] debug_wb_rf_wdata;
 
 // cpu
-mycpu_mega_top  cpu_mid (
+// ref core
+refcpu_top  cpu_mid (
   .aclk         (cpu_clk),
-  .ext_int      ({6'b0, int_cpu}),  //232 only 5bit
-  .aresetn      (cpu_aresetn    ),
-  .global_reset (cpu_global_reset),
+  .intrpt       ({4'b0, int_cpu}),  //232 only 5bit
+  .aresetn      (cpu_aresetn ),
  
   .arid         (cpu_arid[3:0] ),
   .araddr       (cpu_araddr    ),
@@ -210,12 +210,14 @@ mycpu_mega_top  cpu_mid (
   .arprot       (cpu_arprot    ),
   .arvalid      (cpu_arvalid   ),
   .arready      (cpu_arready   ),
+
   .rid          (cpu_rid[3:0]  ),
   .rdata        (cpu_rdata     ),
   .rresp        (cpu_rresp     ),
   .rlast        (cpu_rlast     ),
   .rvalid       (cpu_rvalid    ),
   .rready       (cpu_rready    ),
+
   .awid         (cpu_awid[3:0] ),
   .awaddr       (cpu_awaddr    ),
   .awlen        (cpu_awlen     ),
@@ -226,20 +228,75 @@ mycpu_mega_top  cpu_mid (
   .awprot       (cpu_awprot    ),
   .awvalid      (cpu_awvalid   ),
   .awready      (cpu_awready   ),
+
+  .wid          (    4'b0      ),
   .wdata        (cpu_wdata     ),
   .wstrb        (cpu_wstrb     ),
   .wlast        (cpu_wlast     ),
   .wvalid       (cpu_wvalid    ),
   .wready       (cpu_wready    ),
+
   .bid          (cpu_bid[3:0]  ),
   .bresp        (cpu_bresp     ),
   .bvalid       (cpu_bvalid    ),
   .bready       (cpu_bready    ),
 
-  .debug_wb_pc  (debug_wb_pc   ),
-  .debug_wb_instr(debug_wb_instr),
-  .debug_wb_rf_wdata(debug_wb_rf_wdata)
+  .debug0_wb_pc  (debug_wb_pc   ),
+  .debug0_wb_rf_wen('0),
+  .debug0_wb_rf_wnum('0),
+  .debug0_wb_rf_wdata(debug_wb_rf_wdata),
+  .debug0_wb_inst(debug_wb_instr)
 );
+
+assign cpu_global_reset = ~cpu_aresetn; // useless
+
+// simple_loong_cpu
+//mycpu_mega_top  cpu_mid (
+//  .aclk         (cpu_clk),
+//  .ext_int      ({6'b0, int_cpu}),  //232 only 5bit
+//  .aresetn      (cpu_aresetn    ),
+//  .global_reset (cpu_global_reset),
+ 
+//  .arid         (cpu_arid[3:0] ),
+//  .araddr       (cpu_araddr    ),
+//  .arlen        (cpu_arlen     ),
+//  .arsize       (cpu_arsize    ),
+//  .arburst      (cpu_arburst   ),
+//  .arlock       (cpu_arlock    ),
+//  .arcache      (cpu_arcache   ),
+//  .arprot       (cpu_arprot    ),
+//  .arvalid      (cpu_arvalid   ),
+//  .arready      (cpu_arready   ),
+//  .rid          (cpu_rid[3:0]  ),
+//  .rdata        (cpu_rdata     ),
+//  .rresp        (cpu_rresp     ),
+//  .rlast        (cpu_rlast     ),
+//  .rvalid       (cpu_rvalid    ),
+//  .rready       (cpu_rready    ),
+//  .awid         (cpu_awid[3:0] ),
+//  .awaddr       (cpu_awaddr    ),
+//  .awlen        (cpu_awlen     ),
+//  .awsize       (cpu_awsize    ),
+//  .awburst      (cpu_awburst   ),
+//  .awlock       (cpu_awlock    ),
+//  .awcache      (cpu_awcache   ),
+//  .awprot       (cpu_awprot    ),
+//  .awvalid      (cpu_awvalid   ),
+//  .awready      (cpu_awready   ),
+//  .wdata        (cpu_wdata     ),
+//  .wstrb        (cpu_wstrb     ),
+//  .wlast        (cpu_wlast     ),
+//  .wvalid       (cpu_wvalid    ),
+//  .wready       (cpu_wready    ),
+//  .bid          (cpu_bid[3:0]  ),
+//  .bresp        (cpu_bresp     ),
+//  .bvalid       (cpu_bvalid    ),
+//  .bready       (cpu_bready    ),
+
+//  .debug_wb_pc  (debug_wb_pc   ),
+//  .debug_wb_instr(debug_wb_instr),
+//  .debug_wb_rf_wdata(debug_wb_rf_wdata)
+//);
 
 debug_output debugger (
   .clk(cpu_clk),
