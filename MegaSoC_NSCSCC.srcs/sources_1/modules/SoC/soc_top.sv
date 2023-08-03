@@ -78,7 +78,7 @@ module soc_top #(
     output  [3:0]   vga_b,
     output          vga_hsync,
     output          vga_vsync,
-    input           vga_clk,
+    input  vga_clk,
     
     input  [3:0]    sd_dat_i,
     output [3:0]    sd_dat_o,
@@ -87,6 +87,21 @@ module soc_top #(
     output          sd_cmd_o,
     output          sd_cmd_t,
     output          sd_clk,
+
+    input  utmi_clk,
+    input  [7:0]    utmi_data_in_i,
+    input           utmi_txready_i,
+    input           utmi_rxvalid_i,
+    input           utmi_rxactive_i,
+    input           utmi_rxerror_i,
+    input  [1:0]    utmi_linestate_i,
+    output [7:0]    utmi_data_out_o,
+    output          utmi_txvalid_o,
+    output [1:0]    utmi_op_mode_o,
+    output [1:0]    utmi_xcvrselect_o,
+    output          utmi_termselect_o,
+    output          utmi_dppulldown_o,
+    output          utmi_dmpulldown_o,
     
     output          CDBUS_tx,
     output          CDBUS_tx_t,
@@ -117,6 +132,7 @@ module soc_top #(
 );
 
 wire soc_aresetn;
+wire utmi_aresetn;
 
 `define AXI_LINE(name) AXI_BUS #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32), .AXI_ID_WIDTH(4)) name()
 `define AXI_LITE_LINE(name) AXI_LITE #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32)) name()
@@ -125,17 +141,18 @@ wire soc_aresetn;
 `AXI_LINE(cpu_m);
 `AXI_LINE(sdc_dma_m);
 `AXI_LINE(vga_dma_m);
-`AXI_LINE(fbr_dma_m);
-`AXI_LINE(fbw_dma_m);
+`AXI_LINE(jpeg_dma_m);
 `AXI_LINE(mem_m);
+
+`AXI_LINE(fbw_dma_m); // unused, placeholder
 
 `AXI_LINE(spi_s);
 `AXI_LINE(eth_s);
 `AXI_LINE(intc_s);
 `AXI_LINE(sdc_s);
 `AXI_LINE(vga_s);
-`AXI_LINE(fbr_s);   // framebuffer reader
-`AXI_LINE(fbw_s);   // framebuffer writer
+`AXI_LINE(jpeg_s);
+`AXI_LINE(usb_s);
 
 `AXI_LINE_W(mig_s, 7);
 `AXI_LINE_W(mig_soc, 7);
@@ -165,6 +182,14 @@ axi_cdc_intf #(
     .dst(mig_s)
 ); 
 
+// USB UTMI resetn
+stolen_cdc_sync_rst utmi_rstgen(
+    .src_rst(mig_aresetn),
+    .dest_clk(soc_clk),
+    // output
+    .dest_rst(utmi_resetn)
+);
+
 error_slave_wrapper err_slave_err(soc_clk, soc_aresetn, err_s);
 
 wire spi_interrupt;
@@ -172,14 +197,14 @@ wire eth_interrupt;
 wire uart_interrupt;
 wire cpu_interrupt;
 wire sd_dat_interrupt, sd_cmd_interrupt;
-wire usb_interrupt = 0;
-wire cdbus_interrupt;
-wire i2c_interrupt;
+wire usb_interrupt;
+wire cdbus_interrupt; // unused
+wire i2c_interrupt;   // unused
 // Ethernet should be at lowest bit because the configuration in intc
 // (interrupt of emaclite is a pulse interrupt, not level) 
 // wire [7:0] interrupts = {i2c_interrupt, cdbus_interrupt, usb_interrupt, sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt, eth_interrupt};
 
-wire [3:0] interrupts = {sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt};
+wire [4:0] interrupts = {usb_interrupt, sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt};
 
 cpu_wrapper #(
     .C_ASIC_SRAM(C_ASIC_SRAM)
@@ -230,10 +255,10 @@ function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
         select = 7;
     else if (addr[31:16]==16'h1c11) // VGA Controller
         select = 8;
-    // else if (addr[31:16]==16'h1c16) // Framebuffer Reader
-    //     select = 9;
-    // else if (addr[31:16]==16'h1c17) // Framebuffer Writer
-    //     select = 10;
+    else if (addr[31:16]==16'h1d10) // JPEG Decoder
+        select = 9;
+    else if (addr[31:16]==16'h1c17) // USB Host Controller
+        select = 10;
     else // ERROR
         select = 0;
     return select;
@@ -263,8 +288,8 @@ my_axi_demux_intf #(
     .mst6(intc_s),  // unused
     .mst7(sdc_s),
     .mst8(vga_s),
-    .mst9(fbr_s),   // unused
-    .mst10(fbw_s)   // unused
+    .mst9(jpeg_s), 
+    .mst10(usb_s)
 );
 
 my_axi_mux_intf #(
@@ -282,7 +307,7 @@ my_axi_mux_intf #(
     .slv0(sdc_dma_m),
     .slv1(mem_m),
     .slv2(vga_dma_m),
-    .slv3(fbr_dma_m),  // unused
+    .slv3(jpeg_dma_m),
     .slv4(fbw_dma_m),  // unused
     .mst(mig_soc)
 );
@@ -359,16 +384,36 @@ vga_wrapper vga(
     .vga_clk(vga_clk)
 );
 
-// framebuffer_wrapper fb(
-//     .aclk(soc_clk),
-//     .aresetn(soc_aresetn),
-//     .ctl_reg1(32'h8000_0000),
+// jpeg
+jpeg_decoder_wrapper  jpeg_decoder (
+    .aclk(soc_clk),
+    .aresetn(soc_aresetn),
 
-//     .slv_read(fbr_s),
-//     .slv_write(fbw_s),
-//     .dma_mst_read(fbr_dma_m),
-//     .dma_mst_write(fbw_dma_m)
-// );
+    .ctl_slv(jpeg_s),
+    .dma_mst(jpeg_dma_m)
+);
+
+usb_wrapper  usb_host (
+    .aclk(utmi_clk), // 48MHz
+    .aresetn(utmi_aresetn),
+    .interrupt_o(usb_interrupt),
+
+    .utmi_data_in_i(utmi_data_in_i),
+    .utmi_txready_i(utmi_txready_i),
+    .utmi_rxvalid_i(utmi_rxvalid_i),
+    .utmi_rxactive_i(utmi_rxactive_i),
+    .utmi_rxerror_i(utmi_rxerror_i),
+    .utmi_linestate_i(utmi_linestate_i),
+    .utmi_data_out_o(utmi_data_out_o),
+    .utmi_txvalid_o(utmi_txvalid_o),
+    .utmi_op_mode_o(utmi_op_mode_o),
+    .utmi_xcvrselect_o(utmi_xcvrselect_o),
+    .utmi_termselect_o(utmi_termselect_o),
+    .utmi_dppulldown_o(utmi_dppulldown_o),
+    .utmi_dmpulldown_o(utmi_dmpulldown_o),
+
+    .ctl_slv(usb_s)
+);
 
 //confreg
 la_confreg_syn  confreg_inst (
