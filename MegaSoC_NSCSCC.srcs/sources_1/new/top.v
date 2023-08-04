@@ -31,18 +31,17 @@ module mchip_top (
     inout         UART_RX,              // UART
     inout         UART_TX,
     
-    input           mii_tx_clk,
-    output  [3:0]   mii_txd,    
-    output          mii_tx_en,
-    output          mii_tx_er,
-
-    input           mii_rx_clk,
-    input   [3:0]   mii_rxd, 
-    input           mii_rxdv,
-    input           mii_rx_err,
-    input           mii_crs,
-    input           mii_col,
-    output mii_phy_rstn,
+    input         mii_tx_clk,
+    output [3:0]  mii_txd,    
+    output        mii_tx_en,
+    output        mii_tx_er,
+    input         mii_rx_clk,
+    input  [3:0]  mii_rxd, 
+    input         mii_rxdv,
+    input         mii_rx_err,
+    input         mii_crs,
+    input         mii_col,
+    output        mii_phy_rstn,
     
     output        MDC,                  // MDIO 时钟（RMII 管理总线），由 SoC 时钟分频得到
     inout         MDIO,                 // MDIO 数据
@@ -52,43 +51,62 @@ module mchip_top (
     output [3:0]  VGA_B,
     output        VGA_HSYNC,
     output        VGA_VSYNC,
+
+    input         UTMI_clk,
+    input  [7:0]  UTMI_data,
+    input         UTMI_txready,
+    input         UTMI_rxvalid,
+    input         UTMI_rxactive,
+    input         UTMI_rxerror,
+    input  [1:0]  UTMI_linestate,
+    output        UTMI_txvalid,
+    output [1:0]  UTMI_op_mode,
+    output [1:0]  UTMI_xcvrselect,
+    output        UTMI_termselect,
+    output        UTMI_dppulldown,
+    output        UTMI_dmpulldown,
+    output        UTMI_idpullup,
+    output        UTMI_chrgvbus,
+    output        UTMI_dischrgvbus,
+    output        UTMI_suspend_n,
     
     inout  [3:0]  SD_DAT,               // SDIO 数据输入 / 输出
     inout         SD_CMD,               // SDIO 指令输入 / 输出
     output        SD_CLK,               // SDIO 时钟输出，由 SoC 时钟分频得到
     
-    output          CDBUS_tx,           // CDBUS 总线信号，类似 UART 串口，属于 SoC 时钟域
-    output          CDBUS_tx_en,
-    input           CDBUS_rx,
+    output        CDBUS_tx,             // CDBUS 总线信号，类似 UART 串口，属于 SoC 时钟域
+    output        CDBUS_tx_en,
+    input         CDBUS_rx,
 
-    inout  [7:0] gpio,
+    inout  [7:0]  gpio,
 
     inout i2cm_scl,
     inout i2cm_sda
 );
 
-wire soc_clk;
-wire ui_clk;
-wire soc_aresetn;
-`IPAD_GEN_SIMPLE(sys_rstn)
+    wire soc_clk;
+    wire ui_clk;
+    wire soc_aresetn;
+    `IPAD_GEN_SIMPLE(sys_rstn)
 
-wire mem_sys_clk, mem_ref_clk, cpu_clk, vga_clk;
-wire clk_locked;
+    wire mem_sys_clk, mem_ref_clk, cpu_clk;
+    wire vga_clk;
+    wire clk_locked;
 
-  clk_wiz_1 clk_gen_1
-   (
+  clk_wiz_1 clk_gen_1 (
     // Clock out ports
     .mem_ref_clk(mem_ref_clk),      // output mem_ref_clk
     .mem_sys_clk(mem_sys_clk),      // output mem_sys_clk
     .cpu_clk(cpu_clk),              // output cpu_clk
-    .vga_clk(vga_clk),              // ouptut vga_clk
-    .soc_clk(soc_clk),
+    .vga_clk(vga_clk),              // output vga_clk
     // Status and control signals
     .resetn(sys_rstn_c),            // input resetn
     .locked(clk_locked),
     // Clock in ports
-    .clk_in1(clk_100m));            // input clk_in1
+    .clk_in1(clk_100m)              // input clk_in1
+  );
 
+  assign soc_clk = clk_100m; // tmp assign, soc_clk should removed
 
 // WARNING: en==0 means output, en==1 means input!!!
 `IOBUF_GEN_SIMPLE(UART_TX)
@@ -123,6 +141,24 @@ wire clk_locked;
 `OPAD_GEN_SIMPLE(VGA_HSYNC)
 `OPAD_GEN_SIMPLE(VGA_VSYNC)
 
+`IOBUF_GEN_VEC_UNIFORM_SIMPLE(UTMI_data)
+`IPAD_GEN_SIMPLE(UTMI_txready)
+`IPAD_GEN_SIMPLE(UTMI_rxvalid)
+`IPAD_GEN_SIMPLE(UTMI_rxactive)
+`IPAD_GEN_SIMPLE(UTMI_rxerror)
+`IPAD_GEN_VEC_SIMPLE(UTMI_linestate)
+`OPAD_GEN_SIMPLE(UTMI_txvalid)
+`OPAD_GEN_VEC_SIMPLE(UTMI_op_mode)
+`OPAD_GEN_VEC_SIMPLE(UTMI_xcvrselect)
+`OPAD_GEN_SIMPLE(UTMI_termselect)
+`OPAD_GEN_SIMPLE(UTMI_dppulldown)
+`OPAD_GEN_SIMPLE(UTMI_dmpulldown)
+// do not use: set 0
+`OPAD_GEN_SIMPLE(UTMI_idpullup)
+`OPAD_GEN_SIMPLE(UTMI_chrgvbus)
+`OPAD_GEN_SIMPLE(UTMI_dischrgvbus)
+`OPAD_GEN_SIMPLE(UTMI_suspend_n) // 1
+
 `OPAD_GEN_SIMPLE(SD_CLK)
 `IOBUF_GEN_SIMPLE(SD_CMD)
 `IOBUF_GEN_VEC_UNIFORM_SIMPLE(SD_DAT)
@@ -149,8 +185,8 @@ wire        mem_axi_wlast;
 wire        mem_axi_wvalid;
 wire        mem_axi_wready;
 wire        mem_axi_bready;
-wire  [6:0] mem_axi_bid;
-wire  [1:0] mem_axi_bresp;
+wire [6:0]  mem_axi_bid;
+wire [1:0]  mem_axi_bresp;
 wire        mem_axi_bvalid;
 wire [6:0]  mem_axi_arid;
 wire [31:0] mem_axi_araddr;
@@ -166,27 +202,27 @@ wire [1:0]  mem_axi_rresp;
 wire        mem_axi_rlast;
 wire        mem_axi_rvalid;
 wire mig_ui_sync_rst;
-  mig_axi_32 u_mig_axi_32 (
 
+  mig_axi_32 u_mig_axi_32 (
     // Memory interface ports
-    .ddr3_addr                      (ddr3_addr),  // output [12:0]		ddr3_addr
-    .ddr3_ba                        (ddr3_ba),  // output [2:0]		ddr3_ba
+    .ddr3_addr                      (ddr3_addr),   // output [12:0]		ddr3_addr
+    .ddr3_ba                        (ddr3_ba),     // output [2:0]		ddr3_ba
     .ddr3_cas_n                     (ddr3_cas_n),  // output			ddr3_cas_n
-    .ddr3_ck_n                      (ddr3_ck_n),  // output [0:0]		ddr3_ck_n
-    .ddr3_ck_p                      (ddr3_ck_p),  // output [0:0]		ddr3_ck_p
-    .ddr3_cke                       (ddr3_cke),  // output [0:0]		ddr3_cke
+    .ddr3_ck_n                      (ddr3_ck_n),   // output [0:0]		ddr3_ck_n
+    .ddr3_ck_p                      (ddr3_ck_p),   // output [0:0]		ddr3_ck_p
+    .ddr3_cke                       (ddr3_cke),    // output [0:0]		ddr3_cke
     .ddr3_ras_n                     (ddr3_ras_n),  // output			ddr3_ras_n
-    .ddr3_reset_n                   (ddr3_reset_n),  // output			ddr3_reset_n
-    .ddr3_we_n                      (ddr3_we_n),  // output			ddr3_we_n
-    .ddr3_dq                        (ddr3_dq),  // inout [15:0]		ddr3_dq
+    .ddr3_reset_n                   (ddr3_reset_n),// output			ddr3_reset_n
+    .ddr3_we_n                      (ddr3_we_n),   // output			ddr3_we_n
+    .ddr3_dq                        (ddr3_dq),     // inout [15:0]		ddr3_dq
     .ddr3_dqs_n                     (ddr3_dqs_n),  // inout [1:0]		ddr3_dqs_n
     .ddr3_dqs_p                     (ddr3_dqs_p),  // inout [1:0]		ddr3_dqs_p
-    .init_calib_complete            (),  // output			init_calib_complete
+    .init_calib_complete            (),            // output			init_calib_complete
       
-    .ddr3_dm                        (ddr3_dm),  // output [1:0]		ddr3_dm
-    .ddr3_odt                       (ddr3_odt),  // output [0:0]		ddr3_odt
+    .ddr3_dm                        (ddr3_dm),     // output [1:0]		ddr3_dm
+    .ddr3_odt                       (ddr3_odt),    // output [0:0]		ddr3_odt
     // Application interface ports
-    .ui_clk                         (ui_clk),  // output			ui_clk
+    .ui_clk                         (ui_clk),      // output			ui_clk
     .ui_clk_sync_rst                (mig_ui_sync_rst),  // output			ui_clk_sync_rst
     .aresetn                        (soc_aresetn),  // input			aresetn
 
@@ -242,7 +278,7 @@ wire mig_ui_sync_rst;
     // Reference Clock Ports
     .clk_ref_i                      (mem_ref_clk),
     .sys_rst                        (clk_locked) // input sys_rst
-    );
+  );
     
 assign soc_aresetn = ~mig_ui_sync_rst;
 
@@ -284,6 +320,7 @@ soc_top #(
     .mem_axi_rlast(mem_axi_rlast),
     .mem_axi_rvalid(mem_axi_rvalid),
     
+    // SPI
     .csn_o(SPI_CS_c),
     .sck_o(SPI_CLK_c),
     .sdo_i(SPI_MOSI_i),
@@ -293,6 +330,7 @@ soc_top #(
     .sdi_o(SPI_MISO_o),
     .sdi_en(SPI_MISO_t),
     
+    // UART
     .uart_txd_i(UART_TX_i),
     .uart_txd_o(UART_TX_o),
     .uart_txd_en(UART_TX_t),
@@ -300,11 +338,11 @@ soc_top #(
     .uart_rxd_o(UART_RX_o),
     .uart_rxd_en(UART_RX_t),
     
+    // MII
     .mii_tx_clk(mii_tx_clk_c),
     .mii_txd(mii_txd_c),    
     .mii_tx_en(mii_tx_en_c),
     .mii_tx_er(mii_tx_er_c),
-
     .mii_rx_clk(mii_rx_clk_c),
     .mii_rxd(mii_rxd_c), 
     .mii_rxdv(mii_rxdv_c),
@@ -326,7 +364,29 @@ soc_top #(
     .vga_hsync  (VGA_HSYNC_c),
     .vga_vsync  (VGA_VSYNC_c),
     .vga_clk    (vga_clk),  // input
+
+    // USB: UTMI
+    .utmi_clk         (UTMI_clk),
+    .utmi_data_i      (UTMI_data_i),
+    .utmi_txready_i   (UTMI_txready_c),
+    .utmi_rxvalid_i   (UTMI_rxvalid_c),
+    .utmi_rxactive_i  (UTMI_rxactive_c),
+    .utmi_rxerror_i   (UTMI_rxerror_c),
+    .utmi_linestate_i (UTMI_linestate_c),
+    .utmi_data_o      (UTMI_data_o),
+    .utmi_data_t      (UTMI_data_t),
+    .utmi_txvalid_o   (UTMI_txvalid_c),
+    .utmi_op_mode_o   (UTMI_op_mode_c),
+    .utmi_xcvrselect_o(UTMI_xcvrselect_c),
+    .utmi_termselect_o(UTMI_termselect_c),
+    .utmi_dppulldown_o(UTMI_dppulldown_c),
+    .utmi_dmpulldown_o(UTMI_dmpulldown_c),    
+    .utmi_idpullup_o   (UTMI_idpullup_c),
+    .utmi_chrgvbus_o   (UTMI_chrgvbus_c),
+    .utmi_dischrgvbus_o(UTMI_dischrgvbus_c),
+    .utmi_suspend_n_o  (UTMI_suspend_n_c),
     
+    // SD
     .sd_dat_i(SD_DAT_i),
     .sd_dat_o(SD_DAT_o),
     .sd_dat_t(SD_DAT_t),

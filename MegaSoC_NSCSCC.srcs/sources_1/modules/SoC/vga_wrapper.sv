@@ -15,22 +15,25 @@ module vga_wrapper (
 
     logic [5:0] vga_red, vga_green, vga_blue;
 
-    (*mark_debug = "true"*) wire [3 :0] slave_ar_addr  = slv.ar_addr  ;
+    (*mark_debug = "true"*) wire [31:0] slave_ar_addr  = slv.ar_addr  ;
     (*mark_debug = "true"*) wire        slave_ar_valid = slv.ar_valid ;
     (*mark_debug = "true"*) wire        slave_ar_ready = slv.ar_ready ;
+
     (*mark_debug = "true"*) wire [31:0] slave_r_data   = slv.r_data   ;
     (*mark_debug = "true"*) wire [1 :0] slave_r_resp   = slv.r_resp   ;
     (*mark_debug = "true"*) wire        slave_r_valid  = slv.r_valid ;
-    assign slv.r_last = slave_r_valid;
     (*mark_debug = "true"*) wire        slave_r_last  = slv.r_last;
     (*mark_debug = "true"*) wire        slave_r_ready  = slv.r_ready  ;
-    (*mark_debug = "true"*) wire [3 :0] slave_aw_addr  = slv.aw_addr  ;
+    
+    (*mark_debug = "true"*) wire [31:0] slave_aw_addr  = slv.aw_addr  ;
     (*mark_debug = "true"*) wire        slave_aw_valid = slv.aw_valid ;
     (*mark_debug = "true"*) wire        slave_aw_ready = slv.aw_ready ;
+    
     (*mark_debug = "true"*) wire [31:0] slave_w_data   = slv.w_data   ;
     (*mark_debug = "true"*) wire [3 :0] slave_w_strb   = slv.w_strb   ;
     (*mark_debug = "true"*) wire        slave_w_valid  = slv.w_valid  ;
     (*mark_debug = "true"*) wire        slave_w_ready  = slv.w_ready  ;
+    
     (*mark_debug = "true"*) wire [1 :0] slave_b_resp   = slv.b_resp   ;
     (*mark_debug = "true"*) wire        slave_b_valid  = slv.b_valid  ;
     (*mark_debug = "true"*) wire        slave_b_ready  = slv.b_ready  ;
@@ -41,43 +44,11 @@ module vga_wrapper (
     (*mark_debug = "true"*) wire [3 :0] slave_b_id  = slv.b_id  ;
 
     assign slv.r_id = slv.ar_id;
+    assign slv.r_last = slv.r_valid;
     assign slv.b_id = slv.aw_id;
     assign dma_mst.ar_id = '0;
     assign dma_mst.aw_id = '0;
 
-    // (*mark_debug = "true"*) wire [31:0] dma_master_ar_addr  = dma_mst.ar_addr  ;
-    // (*mark_debug = "true"*) wire [7 :0] dma_master_ar_len   = dma_mst.ar_len   ;
-    // (*mark_debug = "true"*) wire [2 :0] dma_master_ar_size  = dma_mst.ar_size  ;
-    // (*mark_debug = "true"*) wire [1 :0] dma_master_ar_burst = dma_mst.ar_burst ;
-    // (*mark_debug = "true"*) wire [3 :0] dma_master_ar_cache = dma_mst.ar_cache ;
-    // (*mark_debug = "true"*) wire [2 :0] dma_master_ar_prot  = dma_mst.ar_prot  ;
-    // (*mark_debug = "true"*) wire        dma_master_ar_valid = dma_mst.ar_valid ;
-    // (*mark_debug = "true"*) wire        dma_master_ar_ready = dma_mst.ar_ready ;
-    // (*mark_debug = "true"*) wire [31:0] dma_master_r_data   = dma_mst.r_data   ;
-    // (*mark_debug = "true"*) wire [1 :0] dma_master_r_resp   = dma_mst.r_resp   ;
-    // (*mark_debug = "true"*) wire        dma_master_r_last   = dma_mst.r_last   ;
-    // (*mark_debug = "true"*) wire        dma_master_r_valid  = dma_mst.r_valid  ;
-    // (*mark_debug = "true"*) wire        dma_master_r_ready  = dma_mst.r_ready  ;
-    // (*mark_debug = "true"*) wire [31:0] dma_master_aw_addr  = dma_mst.aw_addr  ;
-    // (*mark_debug = "true"*) wire [7 :0] dma_master_aw_len   = dma_mst.aw_len   ;
-    // (*mark_debug = "true"*) wire [2 :0] dma_master_aw_size  = dma_mst.aw_size  ;
-    // (*mark_debug = "true"*) wire [1 :0] dma_master_aw_burst = dma_mst.aw_burst ;
-    // (*mark_debug = "true"*) wire [3 :0] dma_master_aw_cache = dma_mst.aw_cache ;
-    // (*mark_debug = "true"*) wire [2 :0] dma_master_aw_prot  = dma_mst.aw_prot  ;
-    // (*mark_debug = "true"*) wire        dma_master_aw_valid = dma_mst.aw_valid ;
-    // (*mark_debug = "true"*) wire        dma_master_aw_ready = dma_mst.aw_ready ;
-    // (*mark_debug = "true"*) wire [31:0] dma_master_w_data   = dma_mst.w_data   ;
-    // (*mark_debug = "true"*) wire [3 :0] dma_master_w_strb   = dma_mst.w_strb   ;
-    // (*mark_debug = "true"*) wire        dma_master_w_last   = dma_mst.w_last   ;
-    // (*mark_debug = "true"*) wire        dma_master_w_valid  = dma_mst.w_valid  ;
-    // (*mark_debug = "true"*) wire        dma_master_w_ready  = dma_mst.w_ready  ;
-    // (*mark_debug = "true"*) wire [1 :0] dma_master_b_resp   = dma_mst.b_resp   ;
-    // (*mark_debug = "true"*) wire        dma_master_b_valid  = dma_mst.b_valid  ;
-    // (*mark_debug = "true"*) wire        dma_master_b_ready  = dma_mst.b_ready  ;
-
-
-  //.md_error(md_error),            // output wire md_error
-  //.ip2intc_irpt(ip2intc_irpt),    // output wire ip2intc_irpt
     vga_controller instance_vga (
         .s_axi_aclk         (aclk),
         .s_axi_aresetn      (aresetn),

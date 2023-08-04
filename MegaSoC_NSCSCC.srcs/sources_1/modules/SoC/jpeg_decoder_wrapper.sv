@@ -6,6 +6,10 @@ module jpeg_decoder_wrapper (
     AXI_BUS.Master dma_mst
   );
 
+  assign ctl_slv.r_id   = ctl_slv.ar_id;
+  assign ctl_slv.r_last = ctl_slv.r_valid;
+  assign ctl_slv.b_id   = ctl_slv.aw_id;
+
   jpeg_decoder # (
                  .AXI_ID(4)
                )

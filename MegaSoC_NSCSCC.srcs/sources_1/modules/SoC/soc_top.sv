@@ -78,7 +78,7 @@ module soc_top #(
     output  [3:0]   vga_b,
     output          vga_hsync,
     output          vga_vsync,
-    input  vga_clk,
+    input           vga_clk,
     
     input  [3:0]    sd_dat_i,
     output [3:0]    sd_dat_o,
@@ -88,20 +88,26 @@ module soc_top #(
     output          sd_cmd_t,
     output          sd_clk,
 
-    input  utmi_clk,
-    input  [7:0]    utmi_data_in_i,
+    input           utmi_clk,
+    input  [7:0]    utmi_data_i,
     input           utmi_txready_i,
     input           utmi_rxvalid_i,
     input           utmi_rxactive_i,
     input           utmi_rxerror_i,
     input  [1:0]    utmi_linestate_i,
-    output [7:0]    utmi_data_out_o,
+    output [7:0]    utmi_data_o,
+    output          utmi_data_t,
     output          utmi_txvalid_o,
     output [1:0]    utmi_op_mode_o,
     output [1:0]    utmi_xcvrselect_o,
     output          utmi_termselect_o,
     output          utmi_dppulldown_o,
     output          utmi_dmpulldown_o,
+    // do not use: set 0
+    output          utmi_idpullup_o,
+    output          utmi_chrgvbus_o,
+    output          utmi_dischrgvbus_o,
+    output          utmi_suspend_n_o,
     
     output          CDBUS_tx,
     output          CDBUS_tx_t,
@@ -173,10 +179,11 @@ axi_cdc_intf #(
     .AXI_DATA_WIDTH(32),
     .LOG_DEPTH(2)
 ) cpu_cdc (
+    // slave side
     .src_clk_i(soc_clk),
     .src_rst_ni(soc_aresetn),
     .src(mig_soc),
-    
+    // master side
     .dst_clk_i(mig_clk),
     .dst_rst_ni(mig_aresetn),
     .dst(mig_s)
@@ -394,23 +401,29 @@ jpeg_decoder_wrapper  jpeg_decoder (
 );
 
 usb_wrapper  usb_host (
-    .aclk(utmi_clk), // 48MHz
+    .aclk(utmi_clk), // 60MHz
     .aresetn(utmi_aresetn),
     .interrupt_o(usb_interrupt),
 
-    .utmi_data_in_i(utmi_data_in_i),
+    .utmi_data_i(utmi_data_i),
     .utmi_txready_i(utmi_txready_i),
     .utmi_rxvalid_i(utmi_rxvalid_i),
     .utmi_rxactive_i(utmi_rxactive_i),
     .utmi_rxerror_i(utmi_rxerror_i),
     .utmi_linestate_i(utmi_linestate_i),
-    .utmi_data_out_o(utmi_data_out_o),
+    .utmi_data_o(utmi_data_o),
+    .utmi_data_t(utmi_data_t),
     .utmi_txvalid_o(utmi_txvalid_o),
     .utmi_op_mode_o(utmi_op_mode_o),
     .utmi_xcvrselect_o(utmi_xcvrselect_o),
     .utmi_termselect_o(utmi_termselect_o),
     .utmi_dppulldown_o(utmi_dppulldown_o),
     .utmi_dmpulldown_o(utmi_dmpulldown_o),
+    // do not use: set 0
+    .utmi_idpullup_o(utmi_idpullup_o),
+    .utmi_chrgvbus_o(utmi_chrgvbus_o),
+    .utmi_dischrgvbus_o(utmi_dischrgvbus_o),
+    .utmi_suspend_n_o(utmi_suspend_n_o),    
 
     .ctl_slv(usb_s)
 );
