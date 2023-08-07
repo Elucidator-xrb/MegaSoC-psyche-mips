@@ -138,7 +138,6 @@ module soc_top #(
 );
 
 wire soc_aresetn;
-wire utmi_aresetn;
 
 `define AXI_LINE(name) AXI_BUS #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32), .AXI_ID_WIDTH(4)) name()
 `define AXI_LITE_LINE(name) AXI_LITE #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32)) name()
@@ -161,7 +160,7 @@ wire utmi_aresetn;
 `AXI_LINE(usb_s);
 
 `AXI_LINE_W(mig_s, 7);
-`AXI_LINE_W(mig_soc, 7);
+`AXI_LINE_W(migsoc_s, 7);
 `AXI_LINE(apb_s);
 `AXI_LINE(cfg_s);
 `AXI_LINE(err_s);
@@ -173,29 +172,23 @@ stolen_cdc_sync_rst soc_rstgen(
     // output
     .dest_rst(soc_aresetn)
 );
+
 axi_cdc_intf #(
-    .AXI_ID_WIDTH(6),
+    .AXI_ID_WIDTH(7),
     .AXI_ADDR_WIDTH(32),
     .AXI_DATA_WIDTH(32),
     .LOG_DEPTH(2)
 ) cpu_cdc (
-    // slave side
+    // slave in
     .src_clk_i(soc_clk),
     .src_rst_ni(soc_aresetn),
-    .src(mig_soc),
-    // master side
+    .src(migsoc_s),
+    // master out
     .dst_clk_i(mig_clk),
     .dst_rst_ni(mig_aresetn),
     .dst(mig_s)
 ); 
 
-// USB UTMI resetn
-stolen_cdc_sync_rst utmi_rstgen(
-    .src_rst(mig_aresetn),
-    .dest_clk(soc_clk),
-    // output
-    .dest_rst(utmi_resetn)
-);
 
 error_slave_wrapper err_slave_err(soc_clk, soc_aresetn, err_s);
 
@@ -225,24 +218,6 @@ cpu_wrapper #(
     .debug_output_mode(debug_output_mode),
     .debug_output_data(debug_output_data)
 );
-
-    (*mark_debug = "true"*) wire [31:0] cpu_master_ar_addr  = cpu_m.ar_addr ;
-    (*mark_debug = "true"*) wire [1:0] cpu_master_ar_burst = cpu_m.ar_burst ;
-    (*mark_debug = "true"*) wire cpu_master_ar_valid = cpu_m.ar_valid ;
-    (*mark_debug = "true"*) wire cpu_master_ar_ready = cpu_m.ar_ready ;
-    (*mark_debug = "true"*) wire cpu_master_r_valid  = cpu_m.r_valid  ;
-    (*mark_debug = "true"*) wire cpu_master_r_ready  = cpu_m.r_ready  ;
-    (*mark_debug = "true"*) wire cpu_master_aw_valid = cpu_m.aw_valid ;
-    (*mark_debug = "true"*) wire cpu_master_aw_ready = cpu_m.aw_ready ;
-    (*mark_debug = "true"*) wire cpu_master_w_valid  = cpu_m.w_valid  ;
-    (*mark_debug = "true"*) wire cpu_master_w_ready  = cpu_m.w_ready  ;
-    (*mark_debug = "true"*) wire cpu_master_b_valid  = cpu_m.b_valid  ;
-    (*mark_debug = "true"*) wire cpu_master_b_ready  = cpu_m.b_ready  ;
-
-    (*mark_debug = "true"*) wire [3:0] cpu_master_ar_id = cpu_m.ar_id ;
-    (*mark_debug = "true"*) wire [3:0] cpu_master_r_id  = cpu_m.r_id  ;
-    (*mark_debug = "true"*) wire [3:0] cpu_master_aw_id = cpu_m.aw_id ;
-    (*mark_debug = "true"*) wire [3:0] cpu_master_b_id  = cpu_m.b_id  ;
 
 function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
     automatic logic [3:0] select;
@@ -316,7 +291,7 @@ my_axi_mux_intf #(
     .slv2(vga_dma_m),
     .slv3(jpeg_dma_m),
     .slv4(fbw_dma_m),  // unused
-    .mst(mig_soc)
+    .mst(migsoc_s)
 );
 
 // axi_intc_wrapper #(
@@ -401,8 +376,10 @@ jpeg_decoder_wrapper  jpeg_decoder (
 );
 
 usb_wrapper  usb_host (
-    .aclk(utmi_clk), // 60MHz
-    .aresetn(utmi_aresetn),
+    .aclk(soc_clk),
+    .aresetn(soc_aresetn),
+    .utmi_clk(utmi_clk), // 60MHz
+
     .interrupt_o(usb_interrupt),
 
     .utmi_data_i(utmi_data_i),
@@ -425,7 +402,7 @@ usb_wrapper  usb_host (
     .utmi_dischrgvbus_o(utmi_dischrgvbus_o),
     .utmi_suspend_n_o(utmi_suspend_n_o),    
 
-    .ctl_slv(usb_s)
+    .usb_ctl_slv(usb_s)
 );
 
 //confreg

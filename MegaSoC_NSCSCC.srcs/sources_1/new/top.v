@@ -222,9 +222,9 @@ wire mig_ui_sync_rst;
     .ddr3_dm                        (ddr3_dm),     // output [1:0]		ddr3_dm
     .ddr3_odt                       (ddr3_odt),    // output [0:0]		ddr3_odt
     // Application interface ports
-    .ui_clk                         (ui_clk),      // output			ui_clk
+    .ui_clk                         (ui_clk),           // output			ui_clk
     .ui_clk_sync_rst                (mig_ui_sync_rst),  // output			ui_clk_sync_rst
-    .aresetn                        (soc_aresetn),  // input			aresetn
+    .aresetn                        (soc_aresetn),      // input			aresetn
 
     .app_sr_req                     (1'b0),  // input			app_sr_req
     .app_ref_req                    (1'b0),  // input			app_ref_req
@@ -410,12 +410,12 @@ soc_top #(
     .debug_output_mode(2'b00),
 
     .i2cm_scl_i,
-	.i2cm_scl_o,
-	.i2cm_scl_t, 
+	  .i2cm_scl_o,
+	  .i2cm_scl_t, 
 
-	.i2cm_sda_i,
-	.i2cm_sda_o,
-	.i2cm_sda_t
+	  .i2cm_sda_i,
+	  .i2cm_sda_o,
+	  .i2cm_sda_t
 );
 
 endmodule

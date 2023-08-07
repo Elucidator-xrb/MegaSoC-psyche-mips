@@ -19,12 +19,13 @@ module cpu_wrapper #(
 
 wire [4:0] int_cpu;
 stolen_cdc_sync_rst cpu_rstgen(
+    .src_rst(m0_aresetn),
     .dest_clk(cpu_clk),
-    .dest_rst(cpu_aresetn),
-    .src_rst(m0_aresetn)
+    // output
+    .dest_rst(cpu_aresetn)
 );
 
-stolen_cdc_array_single #(5, 0, 5) int_cdc(
+stolen_cdc_array_single #(2, 0, 5) int_cdc(
    .src_clk(1'b1),
    .src_in(interrupt),
    .dest_clk(cpu_clk),
