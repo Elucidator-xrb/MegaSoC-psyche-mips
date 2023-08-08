@@ -110,6 +110,11 @@ module soc_top #(
     output          utmi_dischrgvbus_o,
     output          utmi_suspend_n_o,
     
+    output          i2s_lrclk_o,
+    output          i2s_sclk_o,
+    output          i2s_sdata_o,
+    input           i2s_clk,
+
     output          CDBUS_tx,
     output          CDBUS_tx_t,
     output          CDBUS_tx_en,
@@ -148,9 +153,8 @@ wire soc_aresetn;
 `AXI_LINE(sdc_dma_m);
 `AXI_LINE(vga_dma_m);
 `AXI_LINE(jpeg_dma_m);
+`AXI_LINE(i2s_dma_m);
 `AXI_LINE(mem_m);
-
-`AXI_LINE(fbw_dma_m); // unused, placeholder
 
 `AXI_LINE(spi_s);
 `AXI_LINE(eth_s);
@@ -159,6 +163,8 @@ wire soc_aresetn;
 `AXI_LINE(vga_s);
 `AXI_LINE(jpeg_s);
 `AXI_LINE(usb_s);
+`AXI_LINE(i2s_mod_s);
+`AXI_LINE(i2s_tx_s);
 
 `AXI_LINE_W(mig_s, 7);
 `AXI_LINE_W(migsoc_s, 7);
@@ -201,11 +207,13 @@ wire sd_dat_interrupt, sd_cmd_interrupt;
 wire usb_interrupt;
 wire cdbus_interrupt; // unused
 wire i2c_interrupt;   // unused
+wire mod_irq;
+wire tx_irq;
 // Ethernet should be at lowest bit because the configuration in intc
 // (interrupt of emaclite is a pulse interrupt, not level) 
 // wire [7:0] interrupts = {i2c_interrupt, cdbus_interrupt, usb_interrupt, sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt, eth_interrupt};
 
-wire [4:0] interrupts = {usb_interrupt, sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt};
+wire [7:0] interrupts = {'0, tx_irq, mod_irq, usb_interrupt, sd_dat_interrupt, sd_cmd_interrupt, uart_interrupt, spi_interrupt};
 
 cpu_wrapper #(
     .C_ASIC_SRAM(C_ASIC_SRAM)
@@ -230,10 +238,14 @@ function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
         select = 3; 
     else if (addr[31:16]==16'h1fd0) // conf
         select = 2;
-    else if (addr[31:16]==16'h1ff0) // Ethernet
-        select = 4;
+    // else if (addr[31:16]==16'h1ff0) // Ethernet
+    //     select = 4;
     // else if (addr[31:16]==16'h1fb0) // Interrupt Controller
     //     select = 6;
+    else if (addr[31:16]==16'h1c12) // i2s mod
+        select = 4;
+    else if (addr[31:16]==16'h1c13) // i2s tx 
+        select = 6;
     else if (addr[31:16]==16'h1fe1) // SD Controller
         select = 7;
     else if (addr[31:16]==16'h1c11) // VGA Controller
@@ -266,9 +278,9 @@ my_axi_demux_intf #(
     .mst1(mem_m),
     .mst2(cfg_s),
     .mst3(apb_s),
-    .mst4(eth_s),
+    .mst4(i2s_mod_s),
     .mst5(spi_s),
-    .mst6(intc_s),  // unused
+    .mst6(i2s_tx_s),  // unused
     .mst7(sdc_s),
     .mst8(vga_s),
     .mst9(jpeg_s), 
@@ -291,7 +303,7 @@ my_axi_mux_intf #(
     .slv1(mem_m),
     .slv2(vga_dma_m),
     .slv3(jpeg_dma_m),
-    .slv4(fbw_dma_m),  // unused
+    .slv4(i2s_dma_m),
     .mst(migsoc_s)
 );
 
@@ -375,6 +387,22 @@ jpeg_decoder_wrapper  jpeg_decoder (
     .ctl_slv(jpeg_s),
     .dma_mst(jpeg_dma_m)
 );
+
+// i2s
+i2s_wrapper  i2s_wrapper_inst (
+    .aclk(soc_clk),
+    .aresetn(soc_aresetn),
+    .i2s_clk(i2s_clk),
+
+    .lrclk_o(i2s_lrclk_o),
+    .sclk_o(i2s_sclk_o),
+    .sdata_o(i2s_sdata_o),
+    .i2s_mod_slv(i2s_mod_s),
+    .i2s_tx_slv(i2s_tx_s),
+    .dma_mst(i2s_dma_m),
+    .mod_irq(mod_irq),
+    .tx_irq(tx_irq)
+  );
 
 usb_wrapper  usb_host (
     .aclk(soc_clk),

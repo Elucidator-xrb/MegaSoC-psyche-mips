@@ -8,7 +8,7 @@ module cpu_wrapper #(
     input m0_clk,
     input m0_aresetn,
     
-    input [4:0] interrupt,
+    input [7:0] interrupt,
     AXI_BUS.Master m0,
 
     input [1:0]  debug_output_mode,
@@ -17,7 +17,7 @@ module cpu_wrapper #(
     output cpu_global_reset
 );
 
-wire [4:0] int_cpu;
+wire [7:0] int_cpu;
 stolen_cdc_sync_rst cpu_rstgen(
     .src_rst(m0_aresetn),
     .dest_clk(cpu_clk),
@@ -25,7 +25,7 @@ stolen_cdc_sync_rst cpu_rstgen(
     .dest_rst(cpu_aresetn)
 );
 
-stolen_cdc_array_single #(2, 0, 5) int_cdc(
+stolen_cdc_array_single #(2, 0, 8) int_cdc(
    .src_clk(1'b1),
    .src_in(interrupt),
    .dest_clk(cpu_clk),
@@ -253,7 +253,7 @@ wire [31:0] debug_wb_rf_wdata;
 // simple_loong_cpu
 mycpu_mega_top  cpu_mid (
  .aclk         (cpu_clk),
- .ext_int      ({3'b0, int_cpu}),  // [7:0] hardware interrupt
+ .ext_int      (int_cpu),  // [7:0] hardware interrupt
  .aresetn      (cpu_aresetn    ),
  .global_reset (cpu_global_reset),
  

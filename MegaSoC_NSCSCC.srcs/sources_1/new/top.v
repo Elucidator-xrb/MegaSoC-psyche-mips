@@ -70,11 +70,17 @@ module mchip_top (
     output        UTMI_chrgvbus,
     output        UTMI_dischrgvbus,
     output        UTMI_suspend_n,
+
+    // I2S
+    output        I2S_lrclk,
+    output        I2S_sclk,
+    output        I2S_sdata,
     
     inout  [3:0]  SD_DAT,               // SDIO 数据输入 / 输出
     inout         SD_CMD,               // SDIO 指令输入 / 输出
     output        SD_CLK,               // SDIO 时钟输出，由 SoC 时钟分频得到
     
+
     output        CDBUS_tx,             // CDBUS 总线信号，类似 UART 串口，属于 SoC 时钟域
     output        CDBUS_tx_en,
     input         CDBUS_rx,
@@ -91,7 +97,7 @@ module mchip_top (
     `IPAD_GEN_SIMPLE(sys_rstn)
 
     wire mem_sys_clk, mem_ref_clk, cpu_clk;
-    wire vga_clk;
+    wire vga_clk, i2s_clk;
     wire clk_locked;
 
   clk_wiz_1 clk_gen_1 (
@@ -99,11 +105,17 @@ module mchip_top (
     .mem_ref_clk(mem_ref_clk),      // output mem_ref_clk
     .mem_sys_clk(mem_sys_clk),      // output mem_sys_clk
     .cpu_clk(cpu_clk),              // output cpu_clk
-    .vga_clk(vga_clk),              // output vga_clk
+    .vga_clk(vga_clk),              // output vga_clk == 25mhz
+    // .i2s_clk(i2s_clk),              // output i2s_clk == 96mhz
     // Status and control signals
     .resetn(sys_rstn_c),            // input resetn
     .locked(clk_locked),
     // Clock in ports
+    .clk_in1(clk_100m)              // input clk_in1
+  );
+
+  clk_wiz_0 clk_gen_0 (
+    .i2s_clk(i2s_clk),              // output i2s_clk == 96mhz
     .clk_in1(clk_100m)              // input clk_in1
   );
 
@@ -160,6 +172,10 @@ module mchip_top (
 `OPAD_GEN_SIMPLE(UTMI_chrgvbus)
 `OPAD_GEN_SIMPLE(UTMI_dischrgvbus)
 `OPAD_GEN_SIMPLE(UTMI_suspend_n) // 1
+
+`OPAD_GEN_SIMPLE(I2S_lrclk)
+`OPAD_GEN_SIMPLE(I2S_sclk)
+`OPAD_GEN_SIMPLE(I2S_sdata)
 
 `OPAD_GEN_SIMPLE(SD_CLK)
 `IOBUF_GEN_SIMPLE(SD_CMD)
@@ -388,7 +404,13 @@ soc_top #(
     .utmi_chrgvbus_o   (UTMI_chrgvbus_c),
     .utmi_dischrgvbus_o(UTMI_dischrgvbus_c),
     .utmi_suspend_n_o  (UTMI_suspend_n_c),
-    
+
+    // I2S
+    .i2s_lrclk_o           (I2S_lrclk_c),
+    .i2s_sclk_o            (I2S_sclk_c),
+    .i2s_sdata_o           (I2S_sdata_c),
+    .i2s_clk               (i2s_clk),      
+
     // SD
     .sd_dat_i(SD_DAT_i),
     .sd_dat_o(SD_DAT_o),

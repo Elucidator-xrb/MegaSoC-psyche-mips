@@ -79,11 +79,15 @@ set_property -dict {PACKAGE_PIN AB6 IOSTANDARD LVCMOS33} [get_ports {gpio[7]}]
 # FPGA_EXT0_IO0
 set_property -dict {PACKAGE_PIN AD26 IOSTANDARD LVCMOS33} [get_ports CDBUS_tx]
 # FPGA_EXT0_IO1
-set_property -dict {PACKAGE_PIN T19 IOSTANDARD LVCMOS33} [get_ports CDBUS_rx]
+#set_property -dict {PACKAGE_PIN T19 IOSTANDARD LVCMOS33} [get_ports CDBUS_rx]
+set_property -dict {PACKAGE_PIN AB24 IOSTANDARD LVCMOS33} [get_ports CDBUS_rx]
+
 # FPGA_EXT0_IO2
 set_property -dict {PACKAGE_PIN T20 IOSTANDARD LVCMOS33} [get_ports CDBUS_tx_en]
 # FPGA_EXT0_IO3
-set_property -dict {PACKAGE_PIN AD25 IOSTANDARD LVCMOS33} [get_ports i2cm_scl]
+#set_property -dict {PACKAGE_PIN AD25 IOSTANDARD LVCMOS33} [get_ports i2cm_scl]
+set_property -dict {PACKAGE_PIN AC24 IOSTANDARD LVCMOS33} [get_ports i2cm_scl]
+
 # FPGA_EXT0_IO4
 set_property -dict {PACKAGE_PIN AE25 IOSTANDARD LVCMOS33} [get_ports i2cm_sda]
 
@@ -138,8 +142,12 @@ set_property -dict {PACKAGE_PIN AF3  IOSTANDARD LVCMOS33} [get_ports UTMI_chrgvb
 set_property -dict {PACKAGE_PIN AE3  IOSTANDARD LVCMOS33} [get_ports UTMI_dischrgvbus]
 set_property -dict {PACKAGE_PIN AE20 IOSTANDARD LVCMOS33} [get_ports UTMI_suspend_n]
 
+# I2S
+set_property -dict {PACKAGE_PIN T19 IOSTANDARD LVCMOS33} [get_ports I2S_sclk]
+set_property -dict {PACKAGE_PIN AD25 IOSTANDARD LVCMOS33} [get_ports I2S_sdata]
+set_property -dict {PACKAGE_PIN AF25 IOSTANDARD LVCMOS33} [get_ports I2S_lrclk]
+
 # set_property -dict {PACKAGE_PIN AD4  IOSTANDARD LVCMOS33} [get_ports UTMI_hostdisc]
 # set_property -dict {PACKAGE_PIN W4   IOSTANDARD LVCMOS33} [get_ports UTMI_iddig]
 # set_property -dict {PACKAGE_PIN AB1  IOSTANDARD LVCMOS33} [get_ports UTMI_vbusvalid]
 # set_property -dict {PACKAGE_PIN AF2  IOSTANDARD LVCMOS33} [get_ports UTMI_sessend]
-

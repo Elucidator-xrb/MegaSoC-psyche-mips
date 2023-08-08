@@ -106,26 +106,37 @@ module axi_to_axi_lite_id_reflect #(
   logic aw_full, aw_empty, aw_push, aw_pop, ar_full, ar_empty, ar_push, ar_pop;
   id_t  aw_reflect_id, ar_reflect_id;
 
-  assign slv_resp_o = '{
-    aw_ready: mst_resp_i.aw_ready & ~aw_full,
-    w_ready:  mst_resp_i.w_ready,
-    b: '{
-      id:       aw_reflect_id,
-      resp:     mst_resp_i.b.resp,
-      default:  '0
-    },
-    b_valid:  mst_resp_i.b_valid  & ~aw_empty,
-    ar_ready: mst_resp_i.ar_ready & ~ar_full,
-    r: '{
-      id:       ar_reflect_id,
-      data:     mst_resp_i.r.data,
-      resp:     mst_resp_i.r.resp,
-      last:     1'b1,
-      default:  '0
-    },
-    r_valid: mst_resp_i.r_valid & ~ar_empty,
-    default: '0
-  };
+assign slv_resp_o.aw_ready = mst_resp_i.aw_ready & ~aw_full;
+assign slv_resp_o.w_ready = mst_resp_i.w_ready;
+assign slv_resp_o.b.id = aw_reflect_id;
+assign slv_resp_o.b.resp = mst_resp_i.b.resp;
+assign slv_resp_o.b_valid = mst_resp_i.b_valid  & ~aw_empty;
+assign slv_resp_o.ar_ready = mst_resp_i.ar_ready & ~ar_full;
+assign slv_resp_o.r.id = ar_reflect_id;
+assign slv_resp_o.r.data = mst_resp_i.r.data;
+assign slv_resp_o.r.resp = mst_resp_i.r.resp;
+assign slv_resp_o.r.last = 1'b1;
+assign slv_resp_o.r_valid = mst_resp_i.r_valid & ~ar_empty;
+//  assign slv_resp_o = '{
+//    aw_ready: mst_resp_i.aw_ready & ~aw_full,
+//    w_ready:  mst_resp_i.w_ready,
+//    b: '{
+//      id:       aw_reflect_id,
+//      resp:     mst_resp_i.b.resp,
+//      default:  '0
+//    },
+//    b_valid:  mst_resp_i.b_valid  & ~aw_empty,
+//    ar_ready: mst_resp_i.ar_ready & ~ar_full,
+//    r: '{
+//      id:       ar_reflect_id,
+//      data:     mst_resp_i.r.data,
+//      resp:     mst_resp_i.r.resp,
+//      last:     1'b1,
+//      default:  '0
+//    },
+//    r_valid: mst_resp_i.r_valid & ~ar_empty,
+//    default: '0
+//  };
 
   // Write ID reflection
   assign aw_push = mst_req_o.aw_valid & slv_resp_o.aw_ready;
