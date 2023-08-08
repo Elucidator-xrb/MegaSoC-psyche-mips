@@ -1,6 +1,7 @@
 # vivado-project
 *.cache
 *.hw
+*.dcp
 MegaSoC_NSCSCC.gen
 MegaSoC_NSCSCC.runs
 MegaSoC_NSCSCC.ip_user_files

@@ -53,7 +53,7 @@ module mchip_top (
     output        VGA_VSYNC,
 
     input         UTMI_clk,
-    input  [7:0]  UTMI_data,
+    inout  [7:0]  UTMI_data,
     input         UTMI_txready,
     input         UTMI_rxvalid,
     input         UTMI_rxactive,
@@ -65,6 +65,7 @@ module mchip_top (
     output        UTMI_termselect,
     output        UTMI_dppulldown,
     output        UTMI_dmpulldown,
+    output        UTMI_reset,
     output        UTMI_idpullup,
     output        UTMI_chrgvbus,
     output        UTMI_dischrgvbus,
@@ -153,6 +154,7 @@ module mchip_top (
 `OPAD_GEN_SIMPLE(UTMI_termselect)
 `OPAD_GEN_SIMPLE(UTMI_dppulldown)
 `OPAD_GEN_SIMPLE(UTMI_dmpulldown)
+`OPAD_GEN_SIMPLE(UTMI_reset)
 // do not use: set 0
 `OPAD_GEN_SIMPLE(UTMI_idpullup)
 `OPAD_GEN_SIMPLE(UTMI_chrgvbus)
@@ -380,7 +382,8 @@ soc_top #(
     .utmi_xcvrselect_o(UTMI_xcvrselect_c),
     .utmi_termselect_o(UTMI_termselect_c),
     .utmi_dppulldown_o(UTMI_dppulldown_c),
-    .utmi_dmpulldown_o(UTMI_dmpulldown_c),    
+    .utmi_dmpulldown_o(UTMI_dmpulldown_c),
+    .utmi_reset_o     (UTMI_reset_c),   
     .utmi_idpullup_o   (UTMI_idpullup_c),
     .utmi_chrgvbus_o   (UTMI_chrgvbus_c),
     .utmi_dischrgvbus_o(UTMI_dischrgvbus_c),

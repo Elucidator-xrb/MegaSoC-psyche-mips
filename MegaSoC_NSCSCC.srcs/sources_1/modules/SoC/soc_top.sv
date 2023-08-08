@@ -103,6 +103,7 @@ module soc_top #(
     output          utmi_termselect_o,
     output          utmi_dppulldown_o,
     output          utmi_dmpulldown_o,
+    output          utmi_reset_o,
     // do not use: set 0
     output          utmi_idpullup_o,
     output          utmi_chrgvbus_o,
@@ -396,6 +397,7 @@ usb_wrapper  usb_host (
     .utmi_termselect_o(utmi_termselect_o),
     .utmi_dppulldown_o(utmi_dppulldown_o),
     .utmi_dmpulldown_o(utmi_dmpulldown_o),
+    .utmi_reset_o(utmi_reset_o),
     // do not use: set 0
     .utmi_idpullup_o(utmi_idpullup_o),
     .utmi_chrgvbus_o(utmi_chrgvbus_o),

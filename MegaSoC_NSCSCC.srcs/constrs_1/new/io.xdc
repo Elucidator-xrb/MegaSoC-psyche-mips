@@ -131,12 +131,13 @@ set_property -dict {PACKAGE_PIN AF4  IOSTANDARD LVCMOS33} [get_ports {UTMI_xcvrs
 set_property -dict {PACKAGE_PIN AE21 IOSTANDARD LVCMOS33} [get_ports UTMI_termselect]
 set_property -dict {PACKAGE_PIN AC2  IOSTANDARD LVCMOS33} [get_ports UTMI_dppulldown]
 set_property -dict {PACKAGE_PIN AC1  IOSTANDARD LVCMOS33} [get_ports UTMI_dmpulldown]
+set_property -dict {PACKAGE_PIN AD23 IOSTANDARD LVCMOS33} [get_ports UTMI_reset]
 # not used output: set 0 
 set_property -dict {PACKAGE_PIN AD5  IOSTANDARD LVCMOS33} [get_ports UTMI_idpullup]
 set_property -dict {PACKAGE_PIN AF3  IOSTANDARD LVCMOS33} [get_ports UTMI_chrgvbus]
 set_property -dict {PACKAGE_PIN AE3  IOSTANDARD LVCMOS33} [get_ports UTMI_dischrgvbus]
 set_property -dict {PACKAGE_PIN AE20 IOSTANDARD LVCMOS33} [get_ports UTMI_suspend_n]
-# set_property -dict {PACKAGE_PIN AD23 IOSTANDARD LVCMOS33} [get_ports UTMI_reset]
+
 # set_property -dict {PACKAGE_PIN AD4  IOSTANDARD LVCMOS33} [get_ports UTMI_hostdisc]
 # set_property -dict {PACKAGE_PIN W4   IOSTANDARD LVCMOS33} [get_ports UTMI_iddig]
 # set_property -dict {PACKAGE_PIN AB1  IOSTANDARD LVCMOS33} [get_ports UTMI_vbusvalid]

@@ -1,7 +1,7 @@
 module usb_wrapper (
     input wire aclk,
     input wire aresetn,
-    input wire utmi_clk;
+    input wire utmi_clk,
 
     output wire interrupt_o,
 
@@ -20,6 +20,7 @@ module usb_wrapper (
     output wire       utmi_termselect_o,
     output wire       utmi_dppulldown_o,
     output wire       utmi_dmpulldown_o,
+    output wire       utmi_reset_o,
     // do not use: set 0
     output wire       utmi_idpullup_o,
     output wire       utmi_chrgvbus_o,
@@ -61,7 +62,7 @@ module usb_wrapper (
     /* AXI and UTMI connecting */
     assign ctl_slv.b_id = ctl_slv.aw_id;
     assign ctl_slv.r_id = ctl_slv.ar_id;
-    assign ctl_slv.r_last = clt_slv.r_valid;
+    assign ctl_slv.r_last = ctl_slv.r_valid;
 
     assign utmi_data_t = ~utmi_txvalid_o;
     // utmi: unused singal
@@ -72,9 +73,7 @@ module usb_wrapper (
 
     wire usb_interrupt;
 
-    usbh_host # (
-        .USB_CLK_FREQ(60000000)
-    ) usbh_host_inst (
+    usbh_host usbh_host_inst (
         .clk_i(utmi_clk),
         .rst_i(~utmi_rstn),
 
@@ -109,6 +108,7 @@ module usb_wrapper (
         .utmi_termselect_o(utmi_termselect_o),
         .utmi_dppulldown_o(utmi_dppulldown_o),
         .utmi_dmpulldown_o(utmi_dmpulldown_o),
+        .utmi_reset_o     (utmi_reset_o),
 
         .intr_o(usb_interrupt)
     );
@@ -118,8 +118,8 @@ module usb_wrapper (
     stolen_cdc_single #(2,0) usb_intr_cdc (
         .src_clk(utmi_clk),
         .src_in(usb_interrupt),
-        .dst_clk(aclk),
-        .dst_out(interrupt_o)  // output
+        .dest_clk(aclk),
+        .dest_out(interrupt_o)  // output
     );
 
 endmodule
