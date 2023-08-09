@@ -93,7 +93,7 @@ module mchip_top (
 
     wire soc_clk;
     wire ui_clk;
-    wire soc_aresetn;
+    wire mig_aresetn;
     `IPAD_GEN_SIMPLE(sys_rstn)
 
     wire mem_sys_clk, mem_ref_clk, cpu_clk;
@@ -106,7 +106,8 @@ module mchip_top (
     .mem_sys_clk(mem_sys_clk),      // output mem_sys_clk
     .cpu_clk(cpu_clk),              // output cpu_clk
     .vga_clk(vga_clk),              // output vga_clk == 25mhz
-    // .i2s_clk(i2s_clk),              // output i2s_clk == 96mhz
+    .soc_clk(soc_clk),              // output i2s_clk == 96mhz
+    .i2s_clk(i2s_clk),             // output i2s_clk == 96mhz
     // Status and control signals
     .resetn(sys_rstn_c),            // input resetn
     .locked(clk_locked),
@@ -114,12 +115,14 @@ module mchip_top (
     .clk_in1(clk_100m)              // input clk_in1
   );
 
-  clk_wiz_0 clk_gen_0 (
-    .i2s_clk(i2s_clk),              // output i2s_clk == 96mhz
-    .clk_in1(clk_100m)              // input clk_in1
-  );
+  // clk_wiz_0 clk_gen_0 (
+  //   .resetn(!clk_locked),          // input reset
+  //   .i2s_clk(i2s_clk),             // output i2s_clk == 96mhz
+  //   .clk_in1(soc_clk),             // input clk_in1
+  //   .locked(i2s_rst)
+  // );
 
-  assign soc_clk = clk_100m; // tmp assign, soc_clk should removed
+  // assign soc_clk = clk_100m; // tmp assign, soc_clk should removed
 
 // WARNING: en==0 means output, en==1 means input!!!
 `IOBUF_GEN_SIMPLE(UART_TX)
@@ -207,18 +210,18 @@ wire [6:0]  mem_axi_bid;
 wire [1:0]  mem_axi_bresp;
 wire        mem_axi_bvalid;
 wire [6:0]  mem_axi_arid;
-wire [31:0] mem_axi_araddr;
+(*mark_debug = "true"*)wire [31:0] mem_axi_araddr;
 wire [7:0]  mem_axi_arlen;
 wire [2:0]  mem_axi_arsize;
 wire [1:0]  mem_axi_arburst;
-wire        mem_axi_arvalid;
-wire        mem_axi_arready;
-wire        mem_axi_rready;
+(*mark_debug = "true"*)wire        mem_axi_arvalid;
+(*mark_debug = "true"*)wire        mem_axi_arready;
+(*mark_debug = "true"*)wire        mem_axi_rready;
 wire [6:0]  mem_axi_rid;
 wire [31:0] mem_axi_rdata;
 wire [1:0]  mem_axi_rresp;
-wire        mem_axi_rlast;
-wire        mem_axi_rvalid;
+(*mark_debug = "true"*)wire        mem_axi_rlast;
+(*mark_debug = "true"*)wire        mem_axi_rvalid;
 wire mig_ui_sync_rst;
 
   mig_axi_32 u_mig_axi_32 (
@@ -242,7 +245,7 @@ wire mig_ui_sync_rst;
     // Application interface ports
     .ui_clk                         (ui_clk),           // output			ui_clk
     .ui_clk_sync_rst                (mig_ui_sync_rst),  // output			ui_clk_sync_rst
-    .aresetn                        (soc_aresetn),      // input			aresetn
+    .aresetn                        (mig_aresetn),      // input			aresetn
 
     .app_sr_req                     (1'b0),  // input			app_sr_req
     .app_ref_req                    (1'b0),  // input			app_ref_req
@@ -298,14 +301,14 @@ wire mig_ui_sync_rst;
     .sys_rst                        (clk_locked) // input sys_rst
   );
     
-assign soc_aresetn = ~mig_ui_sync_rst;
+assign mig_aresetn = ~mig_ui_sync_rst;
 
 soc_top #(
     .C_ASIC_SRAM(0)
 ) soc (
     .soc_clk(soc_clk),
     .cpu_clk(cpu_clk),
-    .mig_aresetn(soc_aresetn),
+    .mig_aresetn(mig_aresetn),
     .mig_clk(ui_clk),
     
     .mem_axi_awid(mem_axi_awid),
@@ -409,7 +412,7 @@ soc_top #(
     .i2s_lrclk_o           (I2S_lrclk_c),
     .i2s_sclk_o            (I2S_sclk_c),
     .i2s_sdata_o           (I2S_sdata_c),
-    .i2s_clk               (i2s_clk),      
+    .i2s_clk               (i2s_clk),
 
     // SD
     .sd_dat_i(SD_DAT_i),

@@ -149,12 +149,9 @@ wire soc_aresetn;
 `define AXI_LITE_LINE(name) AXI_LITE #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32)) name()
 `define AXI_LINE_W(name, idw) AXI_BUS #(.AXI_ADDR_WIDTH(32), .AXI_DATA_WIDTH(32), .AXI_ID_WIDTH(idw)) name()
 
+`define CLK_BOOST(name, soc_field, mig_field) axi_cdc_intf #(.AXI_ID_WIDTH(4),.AXI_ADDR_WIDTH(32),.AXI_DATA_WIDTH(32),.LOG_DEPTH(2)) name(.src_clk_i(soc_clk),.src_rst_ni(soc_aresetn),.src(soc_field),.dst_clk_i(mig_clk),.dst_rst_ni(mig_aresetn),.dst(mig_field))
+
 `AXI_LINE(cpu_m);
-`AXI_LINE(sdc_dma_m);
-`AXI_LINE(vga_dma_m);
-`AXI_LINE(jpeg_dma_m);
-`AXI_LINE(i2s_dma_m);
-`AXI_LINE(mem_m);
 
 `AXI_LINE(spi_s);
 `AXI_LINE(eth_s);
@@ -167,34 +164,61 @@ wire soc_aresetn;
 `AXI_LINE(i2s_tx_s);
 
 `AXI_LINE_W(mig_s, 7);
-`AXI_LINE_W(migsoc_s, 7);
+// `AXI_LINE_W(migsoc_s, 7);
+
+`AXI_LINE(sdc_dma_m);
+`AXI_LINE(vga_dma_m);
+`AXI_LINE(jpeg_dma_m);
+`AXI_LINE(i2s_dma_m);
+`AXI_LINE(mem_m);
+// BOOST CLOCK
+`AXI_LINE(sdc_dma_mig_m);
+`CLK_BOOST(sdc_boost, sdc_dma_m, sdc_dma_mig_m);
+`AXI_LINE(vga_dma_mig_m);
+`CLK_BOOST(vga_boost, vga_dma_m, vga_dma_mig_m);
+`AXI_LINE(jpeg_dma_mig_m);
+`CLK_BOOST(jpeg_boost, jpeg_dma_m, jpeg_dma_mig_m);
+`AXI_LINE(i2s_dma_mig_m);
+`CLK_BOOST(i2s_boost, i2s_dma_m, i2s_dma_mig_m);
+`AXI_LINE(mem_mig_m);
+`CLK_BOOST(mem_boost, mem_m, mem_mig_m);
+
+
 `AXI_LINE(apb_s);
 `AXI_LINE(cfg_s);
 `AXI_LINE(err_s);
 
 // 这里进行一个时钟域转换，从mig uiclk -> SoC clk
+wire i2s_resetn, i2s_rst;
 stolen_cdc_sync_rst soc_rstgen(
     .src_rst(mig_aresetn),
     .dest_clk(soc_clk),
     // output
     .dest_rst(soc_aresetn)
 );
+stolen_cdc_sync_rst i2s_rstgen(
+    .src_rst(mig_aresetn),
+    .dest_clk(i2s_clk),
+    // output
+    .dest_rst(i2s_resetn)
+);
+assign i2s_rst = !i2s_resetn;
 
-axi_cdc_intf #(
-    .AXI_ID_WIDTH(7),
-    .AXI_ADDR_WIDTH(32),
-    .AXI_DATA_WIDTH(32),
-    .LOG_DEPTH(2)
-) cpu_cdc (
-    // slave in
-    .src_clk_i(soc_clk),
-    .src_rst_ni(soc_aresetn),
-    .src(migsoc_s),
-    // master out
-    .dst_clk_i(mig_clk),
-    .dst_rst_ni(mig_aresetn),
-    .dst(mig_s)
-); 
+// axi_cdc_intf #(
+//     .AXI_ID_WIDTH(7),
+//     .AXI_ADDR_WIDTH(32),
+//     .AXI_DATA_WIDTH(32),
+//     .LOG_DEPTH(2)
+// ) cpu_cdc (
+//     // slave in
+//     .src_clk_i(soc_clk),
+//     .src_rst_ni(soc_aresetn),
+//     .src(migsoc_s),
+//     // master out
+//     .dst_clk_i(mig_clk),
+//     .dst_rst_ni(mig_aresetn),
+//     .dst(mig_s)
+// ); 
 
 
 error_slave_wrapper err_slave_err(soc_clk, soc_aresetn, err_s);
@@ -244,7 +268,7 @@ function automatic logic [3:0] periph_addr_sel(input logic [ 31 : 0 ] addr);
     //     select = 6;
     else if (addr[31:16]==16'h1c12) // i2s mod
         select = 4;
-    else if (addr[31:16]==16'h1c13) // i2s tx 
+    else if (addr[31:16]==16'h1c14 || addr[31:16]==16'h1c15) // i2s tx 
         select = 6;
     else if (addr[31:16]==16'h1fe1) // SD Controller
         select = 7;
@@ -293,18 +317,20 @@ my_axi_mux_intf #(
     .AXI_ADDR_WIDTH(32),
     .AXI_DATA_WIDTH(32),
     .NO_SLV_PORTS(5),
-    .MAX_W_TRANS(2),
+    .MAX_W_TRANS(4),
     .FALL_THROUGH(1)
 ) mem_mux (
-    .clk_i(soc_clk),
-    .rst_ni(soc_aresetn),
+    // .clk_i(soc_clk),
+    .clk_i(mig_clk),
+    // .rst_ni(soc_aresetn),
+    .rst_ni(mig_aresetn),
     .test_i(1'b0),
-    .slv0(sdc_dma_m),
-    .slv1(mem_m),
-    .slv2(vga_dma_m),
-    .slv3(jpeg_dma_m),
-    .slv4(i2s_dma_m),
-    .mst(migsoc_s)
+    .slv0(sdc_dma_mig_m),
+    .slv1(mem_mig_m),
+    .slv2(i2s_dma_mig_m),
+    .slv3(jpeg_dma_mig_m),
+    .slv4(vga_dma_mig_m),
+    .mst(mig_s)
 );
 
 // axi_intc_wrapper #(
@@ -393,6 +419,7 @@ i2s_wrapper  i2s_wrapper_inst (
     .aclk(soc_clk),
     .aresetn(soc_aresetn),
     .i2s_clk(i2s_clk),
+    .i2s_rst(i2s_rst),
 
     .lrclk_o(i2s_lrclk_o),
     .sclk_o(i2s_sclk_o),
